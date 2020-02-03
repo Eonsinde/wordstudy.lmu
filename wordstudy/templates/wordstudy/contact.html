@@ -1,0 +1,187 @@
+{% extends 'wordstudy/index.html' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block extrastyle %}
+<style>
+    .contact-form{
+        margin: 30px auto;
+        width: 95%;
+        box-shadow: 0 0 3px #000000bc;
+        border-radius: 5px;
+        padding: 30px 20px;
+    }
+
+    .contact-header{
+        color:rgb(99, 98, 98);
+        font-size: 2rem;
+    }
+
+    label{
+        color: rgb(99, 98, 98);
+    }
+
+    .prayerbox-form{
+        box-shadow: 0 0 3px #000000bc;
+        margin: 30px auto;
+        padding: 30px 20px;
+        width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+        .contact-form{
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block navitems %}
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0 active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link" href="{% url 'explore' %}">Books</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+    <a class="nav-link active-nav-link" href="{% url 'contact' %}">Contact</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link" href="{% url 'join' %}">Join Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<section class="join-section py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <form class='contact-form' method='POST'>
+                    {% csrf_token %}
+                    <div class='px-2 mt-0 mb-4 text-center'>
+                        <i class='fas text-dark fa-phone-alt fa-2x'></i> <span class='contact-header'>Contact Us</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input name='name' id='name' type="text" class='form-control'>
+                    </div>
+                    <div class="form-group">
+                        <label for="mail">Email</label>
+                        <input name='mail' id='mail' type="email" class='form-control'>
+                    </div>
+                    <div class='form-group'>
+                        <label for="subject">Subject</label>
+                        <input name='subject' id='subject' type="text" class='form-control'>
+                    </div>
+                    <div class='form-group'>
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" class='form-control'></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class='btn my-btn-outline-app-theme' value='Submit'>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <form class='prayerbox-form' method='POST'>
+                    {% csrf_token %}
+                   <header class='mb-2'>
+                        <h3 class='text-uppercase text-dark text-lg-left text-md-left text-sm-center text-center'>Prayer Box</h3>
+                        <small class="text-dark">Fill in your prayers, hearts desires and we'lll join you in prayer</small>
+                   </header>
+                   <div class="form-group">
+                       <input type="text" class='form-control' id='person-name' placeholder="Name">
+                   </div>
+                    <div class="form-group">
+                        <textarea name="prayer-req" id="prayer-req" class='form-control' placeholder="Prayer Request"></textarea>
+                    </div>
+                    <input type="submit" class='btn btn-block my-btn-outline-app-theme' value="Send">
+                </form>
+                <section class="my-4 additional-contact-details d-flex align-items-end justify-content-center">
+                    <div>
+                        <h4 class='text-dark'>Additional Contact Details</h4>
+                        <main>
+                            <p class='m-0'>Webmail: chaplaincy.wordstudy@lmu.edu.ng</p>
+                            <p class='m-0'>Gmail: chaplaincy.wordstudy@gmail.com</p>
+                        </main>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+    </div>
+</section>
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        let contactForm = document.querySelector('.contact-form');
+        let name = document.querySelector('#name');
+        let email = document.querySelector('#mail');
+        let subject = document.querySelector('#subject');
+        let Message = document.querySelector('#message');
+
+        contactForm.onsubmit = e => {
+            e.preventDefault();
+
+            let $form = $(e.target);
+            if (name.value === '' || email.value === '' , subject.value === '' || Message.value === ''){
+                showAlert('Please fill in all fields', 'danger', 4000);
+            }else{
+                contact_instance = {
+                    csrfmiddlewaretoken: $form.find('input[name="csrfmiddlewaretoken"]').val(),
+                    name: name.value,
+                    email: email.value,
+                    subject: subject.value,
+                    message: $form.find('textarea[name="message"]').val(),
+                };
+                $.post("/contact/", contact_instance).done(res => {
+                    if (res.response === 'success'){
+                        showAlert(`Message successfully sent`, 'dark', 4000);
+                        setTimeout(() => {
+                            $form.find('input[type="text"]').val('');
+                            $form.find('input[type="email"]').val('');
+                            $form.find('textarea').val('');
+                        }, 2000);
+                    }else{
+                        showAlert(`Message not sent; please try again`, 'danger', 4000);
+                    }
+                });
+            }
+        }
+
+        // for the prayer request form 
+        let prayerBoxForm = document.querySelector('.prayerbox-form');
+        let prayerReqInput = document.querySelector('#prayer-req');
+        let personName = document.querySelector('#person-name');
+
+        prayerBoxForm.addEventListener('submit', function(e){
+            e.preventDefault();
+
+            if (prayerReqInput.value == '' || personName.value == ''){
+                showAlert('Enter your name and a prayer request', 'danger', 4000);
+            }else{
+                $prayerForm = $(e.target);
+
+                prayerreq_instance = {
+                    csrfmiddlewaretoken: $prayerForm.find('input[name="csrfmiddlewaretoken"]').val(),
+                    person_name: $prayerForm.find('input[id="person-name"]').val(),
+                    prayer_request: $prayerForm.find('textarea[name="prayer-req"]').val()
+                }
+
+                $.post('/make-prayer-request/', prayerreq_instance).done(function(res){
+                    if (res.response === 'success'){
+                        showAlert(`Message successfully sent`, 'primary', 4000);
+                        setTimeout(() => {
+                            $prayerForm.find('input[id="person-name"]').val('');
+                            $prayerForm.find('textarea[name="prayer-req"]').val('');
+                        }, 2000);
+                    }else{
+                        showAlert(`Message not sent; please try again`, 'danger', 4000);
+                    }
+                });
+                console.log(prayerreq_instance);
+            }
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,526 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'PT Sans', sans-serif;
+
+}
+
+.clr{
+    clear: both;
+}
+
+.bg-app-theme{
+    background: rgb(31, 37, 53);
+}
+
+.my-btn{
+    padding: 10px 10px;
+    background: whitesmoke;
+    border: none;
+    transition: .5s ease;
+    background: rgb(44, 45, 49);
+    color: whitesmoke;
+}
+
+.my-btn-outline-app-theme{
+    border: 1px rgb(31, 37, 53) solid;
+    background: none;
+    color: rgb(31, 37, 53);
+}
+
+.my-btn-outline-app-theme:hover{
+    background: rgb(31, 37, 53);
+    color: whitesmoke;
+}
+
+.my-btn-app-theme{
+    background: rgb(31, 37, 53);
+    color: whitesmoke;
+}
+
+.my-btn-app-theme:hover{
+    color: whitesmoke;
+}
+
+.my-btn:hover{
+    box-shadow: 0 0 20px #000000bc;
+}
+
+b{
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.text-ccc{
+    color: rgb(240, 240, 240);
+}
+
+.message-box{
+    z-index: 2;
+    margin: 0;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    left:0;
+    margin: auto;
+    width: 25%;
+    transition: .5s ease-in-out;
+    box-shadow: 0 0 20px #000000bc;
+}
+
+.scroll-top-btn{
+    position: fixed;
+    top: 500px;
+    /* left: 0px; */
+    right: 30px;
+    bottom: 0;
+    z-index: 2;
+    background: rgb(48, 53, 65);
+    color: rgb(248, 248, 248);
+    text-align: center;
+    height: 6%;
+    width: 4%;
+    border: none;
+    transition: .5s ease-in-out;
+    border-radius: 2px;
+    transition: all .5s ease;
+}
+
+.scroll-top-btn:hover{
+    box-shadow: 0 0 20px #000000bc;
+}
+
+/* for the navbar section */
+.navbar-toggler:hover{
+    color: #aaa;
+}   
+
+.bg-display-light{
+    background: rgb(58, 65, 71);
+}
+
+.navbar-brand{
+    color: whitesmoke;
+}
+
+.navbar-brand:hover{
+    color: whitesmoke;
+}
+
+.nav-link{
+    color: whitesmoke;
+    border-bottom: 1px transparent solid;
+    transition: .5s ease;
+}
+
+.active-nav-link{
+    color: whitesmoke;
+    border-bottom: 1px #ccc solid;
+}
+
+.nav-link:hover{
+    color: #ccc;
+    border-bottom: 1px #ccc solid;
+}
+
+/* for my actual nav bar */
+/* .my-navbar{
+    height: 50px;
+}
+
+.navbar-brand{
+    float: left;
+    box-sizing: border-box;
+}
+
+.my-navbar-toggler{
+    display: none;
+}
+
+.my-navbar-nav{
+    float: right;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background: royalblue;
+    height: 50px;
+}
+
+.my-nav-item{
+    display: inline;
+    margin: 0px .7pc;
+}
+
+.my-nav-link{
+    color: whitesmoke;
+    border-bottom: 1px transparent solid;
+    transition: .5s ease;
+}
+
+.my-nav-link:hover{
+    text-decoration: none;
+    color: #ccc;
+    border-bottom: 1px #ccc solid;
+} */
+
+
+
+/* for the carousel section */
+.myCarouselContainer{
+    margin: auto;
+    width: 85%;
+}
+
+#myCarousel{
+    height: 620px;
+    /* background: rgb(38, 38, 43); */
+    background: rgb(33, 33, 36);
+    z-index: 1;
+    box-shadow: 0 5px 10px #000000bc;
+    padding: 10px 10px;
+}
+
+.main-carousel-inner{
+    height: 100%;
+}
+
+.main-carousel-inner > .carousel-item{
+    height: 100%;
+    text-align: center;
+    box-shadow: 0 0 20px #000000bc;
+}
+
+.main-carousel-inner > .carousel-item > img{
+    height: 100%;
+    width: 100%;
+    border: 1px rgba(204, 204, 204, 0.205) solid;
+    border-radius: 2px;
+}
+
+.main-carousel-inner .carousel-caption{
+    background: rgba(23, 27, 37, 0.651);
+    background-size: cover;
+    text-shadow: 0 0 10px #000000bc;
+    box-shadow: 0 0 30px #000000bc;
+}
+
+
+/* brief section */
+.brief-section{
+    color: whitesmoke;
+    border-bottom: 10px rgb(38, 38, 43) solid;
+}
+
+/* word talk section */
+.wordtalk-section{
+    padding: 60px 0px;
+    
+}
+
+
+/* excos section */
+.excos-section{
+    padding: 3pc;
+    border-bottom: 10px rgb(38, 38, 43) solid;
+}
+
+
+/* for the showcase section our application */
+.showcase-section{
+    padding: 60px 0px 80px 0px;
+}
+
+.showcase{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(auto, 300px);
+}
+
+.fam-item{
+    background: #333;
+    box-shadow: 0 2px 5px #000000bc;
+}
+
+.fam-item-1{
+    background: url('./images/fam_preview3.JPG') no-repeat center center;
+    background-size: cover;
+    grid-column: 1/3;
+}
+
+.fam-item-2{
+    background: url('./images/fam_preview2.JPG') no-repeat center center;
+    background-size: cover;
+    grid-column: 3/4;
+    grid-row: 1/3;
+}
+
+.fam-item-3{
+    background: url('./images/fam_preview1.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.fam-item-4{
+    background: url('./images/fam_preview4.JPG') no-repeat center center;
+    background-size: cover;
+}
+
+
+/* for the passion showcase section */
+.passion-section{
+    border-bottom: 10px rgb(38, 38, 43) solid;
+}
+
+.passions-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-family: 'Dancing Script', cursive;
+}
+
+section.passion-showcase-item{
+    width: 100%;
+}
+
+.passions-container > section:nth-child(1){
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.passions-container > section:nth-child(4){
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.passions-container > section:nth-child(3){
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+.my-slide{
+    /* margin: 0px 0px 0px auto; */
+    width: 55%;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.my-slide > img{
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.my-slide-content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    box-sizing: border-box;
+    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background: rgba(218, 165, 32, 0.76);
+    height: 100%;
+    width: 100%;
+    transition: transform .5s ease;
+}
+
+.my-slide:hover .my-slide-content{
+    transform: translate(0, 0);
+}
+
+.my-slide-top .my-slide-content{
+    transform: translate(0, -100%);
+}
+
+.my-slide-right .my-slide-content{
+    transform: translate(-100%, 0);
+}
+
+.my-slide-left .my-slide-content{
+    transform: translate(100%, 0);
+}
+
+
+
+/* event section */
+.event-section{
+    padding: 50px 0px;
+    /* margin: 50px 0px; */
+    border-bottom: 10px rgb(38, 38, 43) solid;
+
+}
+
+#eventsCarousel{
+    height: 500px;
+}
+
+.events-carousel-inner{
+    height: 100%;
+    border-radius: 2px;
+}
+
+.events-carousel-inner > .carousel-item{
+    height: 100%;
+    text-align: center;
+}
+
+.events-carousel-inner > .carousel-item > img{
+    opacity: 1;
+    width: 90%;
+    height: 100%;
+}
+
+
+/* for the footer section of our application */
+footer{
+    
+}
+
+.social-icon{
+    /* margin-right: 5px; */
+    color: whitesmoke;
+    transition: .5s ease;
+    margin: 0px 5px;
+}
+
+.social-icon:hover{
+    color: #aaa;
+}
+
+
+
+/* media queries of our application */
+@media screen and (max-width:768px){
+    .scroll-top-btn{
+        width: 8%;
+    }
+
+    .message-box{
+        width: 40%;
+    }
+
+
+    /* for my nav bar responsiveness */
+    .my-navbar{
+        /* overflow: hidden; */
+    }
+
+    .my-navbar > div.container{
+        position:  relative;
+    }
+
+    .my-navbar-toggler{
+        display: block;
+        position: absolute;
+        right: 13px;
+        top: 14px;
+        bottom: 0;
+        margin: 0;
+    }
+
+    .my-navbar-nav{
+        display: none;
+    }
+
+    .my-navbar-nav.reveal{
+        display: block;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        z-index: 2;
+        background: red;
+        overflow-y: hidden;
+    }
+
+    .my-navbar-nav.reveal .my-nav-item{
+        display: block;
+        transition: .5s ease;
+    }
+
+
+    .myCarouselContainer{
+        width: 100%;
+    }
+
+    #myCarousel{
+        height: 500px;
+    }
+
+
+    .showcase{
+        grid-template-columns: repeat(1, 1fr);
+    }
+        
+    .fam-item-1{
+        grid-column: inherit;
+    }
+
+    .fam-item-2{
+        grid-column: inherit;
+        grid-row: inherit;
+    }
+
+    
+    #eventsCarousel{
+        height: 340px;
+    }
+
+    .events-carousel-inner > .carousel-item > img{
+        width: 100%;
+    }
+
+    .passions-container{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    /* .passions-container > section{
+        grid-row: inherit;
+        grid-column: inherit;
+    } */
+    
+    
+    .passions-container > section:nth-child(1){
+        grid-column: 1/2;
+        grid-row: 2/3;
+    }
+
+    .passions-container > section:nth-child(4){
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+
+    .passions-container > section:nth-child(3){
+        grid-row: 4/5;
+        grid-column: 1/2;
+    } 
+
+    .passions-container > section:nth-child(6){
+        grid-row: 5/6;
+        grid-column: 1/2;
+        
+    }
+  
+}
+
+@media screen and (max-width: 530px){
+    .scroll-top-btn{
+        width: 15%;
+    }
+
+}

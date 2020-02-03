@@ -1,0 +1,51 @@
+{% extends 'wordstudy/index.html' %}
+
+{% block title %}Excos{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        
+    </style>
+{% endblock %}
+
+{% block navitems %}
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0 active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link" href="{% url 'explore' %}">Books</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link" href="{% url 'join' %}">Join Us</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<section class="excos-details-section py-4">
+    <div class='container'>
+    <h3 class='text-uppercase mb-3'>All Excos</h3>
+        <div class="excos row m-0">
+            {% for exco in excos %}
+                <div class="col-md-4 col-sm-6">
+                    <div class="card mb-4 shadow-sm">
+                        <img class="card-img-top" style="height: 100%; width: 100%; display: block;" src='{{ exco.photo.url }}' data-holder-rendered="true">
+                        <div class="card-body">
+                            <p class="card-text text-dark text-uppercase text-center">
+                                Name: {{ exco.name }} <br>
+                                Post: {{ exco.get_post_display }}
+                            </p>
+                        </div>
+                    </div>
+                </div>  
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extrascripts %}
+    
+{% endblock %}

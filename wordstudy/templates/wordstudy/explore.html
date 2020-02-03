@@ -1,0 +1,141 @@
+{% extends 'wordstudy/index.html' %}
+
+{% block title %}Explore{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        .bookdisplay-section{
+            /* background: url('../../static/wordstudy/images/pexels-photo-326311.jpeg') center center; */
+            background-size: cover;
+        }
+
+        .main-header{
+            border-bottom: 1px #ccc solid;
+        }
+
+        @media screen and (max-width:768px){
+            header{
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                padding: 5px 0px;
+            }
+        }
+    </style>
+{% endblock %}
+
+
+{% block navitems %}
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0 active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link active-nav-link" href="{% url 'explore' %}">Books</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link" href="{% url 'join' %}">Join Us</a>
+    </li>
+{% endblock %}
+
+
+
+{% block content %}
+{% load static %}
+<div class="container bookdisplay-section py-3">
+    <header class='main-header d-flex justify-content-between my-3'>
+        <h2 class='text-uppercase text-dark'>Explore and download free books</h2>
+        <form class='query-form' method="get">
+            <div class="d-flex justify-content-between">
+                <input type="text" name='query' id='query' placeholder="search..." class='form-control'>
+                <button class="btn my-btn-outline-app-theme mx-1"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </header>
+    <div class="renderSearchPort row m-0">
+    </div>
+    {% for genre in genres %}
+    <header class='sub-header d-flex justify-content-between align-items-center'>
+        <h3 class='mt-2 mb-4 text-dark text-capitalize text-lg-left text-md-left text-sm-center text-center'>{{ genre.name }}</h3>
+        <a href='{% url "details" genre.name %}' class='text-primary' style='text-decoration: none;'>See More</a> 
+    </header>
+    <div class="row m-0">
+        {% for book in genre.book_set.all %}
+        {% if forloop.counter <= 9 %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src='{% if genre.name == "motivational" %}{% static "wordstudy/images/books_cover_2.jpg" %}{% else %}{% static "wordstudy/images/books_cover.jpg" %}{% endif %}' data-holder-rendered="true">
+                <div class="card-body">
+                    <p class="card-text text-dark text-capitalize">
+                        Title: {{ book.title }}
+                        <br>Author: {{ book.author }}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href='{{ book.file.url }}' target="_blank" class="btn my-btn-outline-app-theme">Download</a>
+                        </div>
+                        <small class="text-muted"><i class='fas fa-book-open fa-2x'></i></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+        let queryForm = document.querySelector('.query-form');
+        let renderPort = document.querySelector('.renderSearchPort');
+        let queryInput = document.querySelector('#query');
+
+
+        queryForm.onsubmit = e => {
+            e.preventDefault();
+            if (document.querySelector('#query').value === ''){
+                showAlert("Enter a query", 'danger', 4000);
+            }else{
+                fetch(`/search?query=${document.querySelector('#query').value}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!(data.length === 0)){
+                            renderPort.innerHTML = '';
+                            renderPort.innerHTML += `<h3 class='col-md-12 text-dark'>Search Results:</h3>`;
+                            for (let i = 0; i < data.length; i++){
+                                renderPort.innerHTML += `
+                                <div class="col-md-4">
+                                    <div class="card mb-4 shadow-sm">
+                                        <img class="card-img-top" src=${ data[i].genre === "motivational" ? '{% static "wordstudy/images/books_cover_2.jpg" %}' :  '{% static "wordstudy/images/books_cover.jpg" %}'} data-holder-rendered="true">
+                                        <div class="card-body">
+                                            <p class="card-text text-dark text-capitalize">
+                                                Title: ${data[i].title}
+                                                <br>Author: ${data[i].author}
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <a href='${data[i].file_url}' target="_blank" class="btn btn-outline-secondary">Download</a>
+                                                </div>
+                                                <small class="text-muted"><i class='fas fa-book-open fa-2x'></i></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+                            } // end of the for-loop
+
+                        }else{
+                            showAlert(`Search results: "${document.querySelector('#query').value}" not found`, 'dark', 5000);
+                        }
+                    })
+                    .catch(e => console.log(e.message)); // end of the fetch request
+            }
+        }
+    </script>
+{% endblock %}
+

@@ -1,0 +1,83 @@
+{% extends 'wordstudy/index.html' %}
+
+{% block title %}{{ category }} books{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        .details-section{
+            padding: 15px 0px;
+        }
+    </style>
+{% endblock %}
+
+{% block navitems %}
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0 active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link" href="{% url 'explore' %}">Books</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link" href="{% url 'join' %}">Join Us</a>
+    </li>
+{% endblock %}
+
+
+{% block content %}
+<section class="details-section">
+    <div class="container">
+        <div class="details">
+            <h3 class='mt-2 mb-4 text-dark text-capitalize text-lg-left text-md-left text-sm-center text-center'>{{ category }}</h3>
+            <div class="row m-0">
+                {% for book in genre %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        {% load static %}
+                        <img class="card-img-top" src='{% if genre.name == "motivational" %}{% static "wordstudy/images/books_cover_2.jpg" %}{% else %}{% static "wordstudy/images/books_cover.jpg" %}{% endif %}' data-holder-rendered="true">
+                        <div class="card-body">
+                            <p class="card-text text-dark text-capitalize">
+                                Title: {{ book.title }}
+                                <br>Author: {{ book.author }}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href='{{ book.file.url }}' target="_blank" class="btn my-btn-outline-app-theme">Download</a>
+                                </div>
+                                <small class="text-muted"><i class='fas fa-book-open fa-2x'></i></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="m-auto text-center">
+                <span class="step-links">
+                    {% if genre.has_previous %}
+                        <a href="?page=1" class='btn my-btn-app-theme'><i class='fas fa-angle-double-left'></i></a>
+                        <a href="?page={{ genre.previous_page_number }}" class='btn my-btn-app-theme'><i class='fas fa-angle-left'></i></a>
+                    {% else %}
+                        <a href="javascript:void(0)" class='btn btn-secondary disabled'><i class='fas fa-angle-double-left'></i></a>
+                    {% endif %}
+                    <span class="current">
+                        <a href="javascript:void(0);" class='btn btn-primary'>{{ genre.number }}</a>
+                    </span>
+                    {% if genre.has_next %}
+                        <a href="?page={{ genre.next_page_number }}" class='btn my-btn-app-theme'><i class='fas fa-angle-right'></i></a>
+                        <a href="?page={{ genre.paginator.num_pages }}" class='btn my-btn-app-theme'><i class='fas fa-angle-double-right'></i></a>
+                    {% else %}
+                        <a href="javascript:void(0);" class='btn btn-secondary disabled'><i class='fas fa-angle-double-right'></i></a>
+                    {% endif %}
+                </span>
+            </div><!-- end of the pagination thingy -->
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+{% block extrascripts %}
+    
+{% endblock %}

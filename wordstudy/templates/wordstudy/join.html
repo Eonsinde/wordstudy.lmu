@@ -1,0 +1,133 @@
+{% extends 'wordstudy/index.html' %}
+
+{% block title %}Join Us{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        .join-section{
+            
+        }
+
+        .joinus-form{
+            margin: 30px 0px;
+            box-shadow: 0 0 3px #000000bc;
+            border-radius: 5px;
+            padding: 30px 10px;
+        }
+
+        .joinus-header{
+            color:rgb(99, 98, 98);
+            font-size: 2rem;
+        }
+
+        label{
+            color: rgb(99, 98, 98);
+        }
+
+        .text-sss{
+            color: rgb(148, 144, 144);
+        }
+    </style>
+{% endblock %}
+
+
+{% block navitems %}
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0 active">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link" href="{% url 'explore' %}">Books</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+    </li>
+    <li class="nav-item px-lg-0 px-md-0 px-sm-2 px-3 m-md-1 m-0">
+        <a class="nav-link active-nav-link" href="{% url 'join' %}">Join Us</a>
+    </li>
+{% endblock %}
+
+
+{% block content %}
+    <section class="join-section py-3">
+        <div class="container">
+            <form class='joinus-form'>
+                <div class='px-2 mt-0 mb-4'>
+                    <span class='joinus-header'>Join Us</span> <i class='fas text-dark fa-arrow-alt-circle-right fa-2x'></i>
+                </div>
+                {% csrf_token %}
+                <div class="row m-0">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name</label>
+                        <input name='name' id='name' type="text" class='form-control'>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="mail">Email</label>
+                        <input name='mail' id='mail' type="email" class='form-control'>
+                    </div>
+                    <div class='form-group col-md-6'>
+                        <label for="department">Department</label>
+                        <input name='department' id='department' type="text" class='form-control'>
+                    </div>
+                    <div class='form-group col-md-6'>
+                        <label for="room-no">Room Number</label>
+                        <input name='room-no' type="text" id='room-no' class='form-control'>
+                    </div>
+                    <div class='form-group col-md-6'>
+                        <label for="date-of-birth">Date Of Birth</label>
+                        <input type="date" name='date-of-birth' id='date-of-birth' class='form-control'>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="date-joined">Date Joined</label>
+                        <input type="text" id='date-joined' value='{{ current_date }}' class='form-control' disabled=true>
+                        <small class='text-sss'><i>This is automatically added based on the current date</i></small>
+                    </div>
+                </div>
+                <div class="form-group p-3">
+                    <input type="submit" class='btn my-btn-outline-app-theme' value='Submit'>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+        $form = $('.joinus-form');
+
+        let clearFields = () => { // to clear fields after submission
+            setTimeout(() => {
+                $form.find('input[type="text"]').val('');
+                $form.find('input[type="email"]').val('');
+                $form.find('input[type="date"]').val('');
+            }, 2000);
+        }
+
+        $form.on('submit', function(e){
+            e.preventDefault();
+            if ($form.find('input[type="text"]').val() === '' || $form.find('input[type="mail"]').val() === '' || $form.find('input[type="date"]').val() === ''){
+                showAlert("Please fill in all fields", 'danger', 3000);
+            }else{
+                member_instance = {
+                    csrfmiddlewaretoken: $form.find('input[name="csrfmiddlewaretoken"]').val(),
+                    name : $form.find('input[name="name"]').val(),
+                    email: $form.find('input[name="mail"]').val(),
+                    department: $form.find('input[name="department"]').val(),
+                    room_no: $form.find('input[name="room-no"]').val(),
+                    date_of_birth: $form.find('input[name="date-of-birth"]').val()
+                }
+                $.post("/join/", member_instance).done(res => {
+                    if (res.message === 'success'){
+                        showAlert(`Thank you for joining us; a mail will be sent to you shortly`, 'dark', 6000);
+                        clearFields();
+                    }else{
+                        showAlert(`Oops! error in registering you`, 'danger', 6000);
+                        clearFields();
+                    }
+                });
+            }
+        });
+        
+       
+    </script>
+{% endblock %}
