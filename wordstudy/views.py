@@ -8,7 +8,79 @@ from django.conf import settings
 from django.core.paginator import Paginator
 import smtplib
 
+from rest_framework import viewsets
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.decorators import permission_classes
+from rest_framework import permissions
+
+
+from wordstudy.serializers import *
+from wordstudy.permissions import *
+
 # Create your views here.
+
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+
+class GenreViewSet(viewsets.ModelViewSet):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+    permission_classes = (MakeChangesOrCreateBook, )
+
+    def create(self, request, *args, **kwargs):
+        serializer = BookSerializer(data=request.data)
+
+        if serializer.is_valid():
+            new_book = serializer.save()
+
+            return Response({
+                'book': BookSerializer(new_book).data,
+                'message': 's'  # s - for success
+            })
+        else:
+            return Response({
+                'message': 'f'  # s - for failure
+            })
+
+    def list(self, request, *args, **kwargs):
+        if len(request.query_params) != 0:
+            query = request.query_params.get('title')
+            _serializer = BookSerializer(Book.objects.filter(title__icontains=query), many=True)
+            return Response(_serializer.data)
+
+        queryset = self.get_queryset()
+        serializer = BookSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class ExcosViewSet(viewsets.ModelViewSet):
+    queryset = Excos.objects.all()
+    serializer_class = ExcosSerializer
+
+
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+
+class MemberViewSet(viewsets.ModelViewSet):
+    queryset = Member.objects.all()
+    serializer_class = MemberSerializer
+
+
+class PrayerBoxViewSet(viewsets.ModelViewSet):
+    queryset = PrayerBox.objects.all()
+    serializer_class = PrayerBoxSerializer
 
 
 def index(request):

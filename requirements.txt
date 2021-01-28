@@ -1,0 +1,10 @@
+python==3
+django==2.2
+pillow
+dj-database-url
+psycopg2
+pytz
+sqlparse
+whitenoise
+rest_framework
+knox

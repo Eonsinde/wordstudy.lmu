@@ -1,0 +1,256 @@
+@keyframes meGrowIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        }
+}
+
+
+.library-section{
+    padding: 0px 0px 90px 0;
+
+}
+
+.library-banner{
+    background: url('../../static/img/bookshelf.jpg') center center/cover;
+    height: 350px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.library-banner::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 3, 3, 0.329);
+}
+
+.library-banner > div{
+    z-index: 3;
+    width: 100%;
+    text-align: center;
+}
+
+.library-banner div > h1{
+    z-index: 3;
+    color: #fff;
+}
+
+.library-banner div > h1 > span{
+    color: rgb(236, 236, 236);
+}
+
+form.query-form{
+    width: 30%;
+    margin: auto;
+}
+
+@media screen and (max-width: 1200px) {
+    .library-banner > div{
+    }
+
+    form.query-form{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    form.query-form{
+        width: 75%;
+    }
+}
+
+.query-form-field-sect{
+    border: 1px #fff solid;
+    transition: border-color .5s ease;
+}
+
+.query-form-field-sect:focus-within{
+    border-color: var(--app-theme);
+}
+
+form.query-form input{
+    background: #fff;
+    border: none;
+    border-radius: none !important;
+    color: #111;
+    flex: 2;
+    padding: 10px 8px;
+    border-right: 1px #fff solid;
+    outline: none;
+}
+
+form.query-form  button{
+    border: 1px var(--app-theme) solid;
+    background: var(--app-theme);
+    color: #fff;
+    line-height: 0;
+    padding: 0 10px;
+    outline: none;
+}
+
+.query-form button:hover{
+    color: #fff;
+}
+
+.library-filter-section{
+
+}
+
+.library-filter-section > p{
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.filter-dropdown{
+    position: relative;
+}
+
+.filter-link{
+    font-weight: 600;
+    font-size: 17px;
+    color: #343a40;
+    background: none;
+    border: none;
+}
+
+.filter-link.active{
+    color: #343a40;
+    background: none;
+    border: none;
+}
+
+.filter-link:hover{
+    text-decoration: none;  
+    color: #343a40;
+    background: none;
+}
+
+@keyframes fadeIn{
+    100%{
+        opacity: 1;
+    }
+}
+
+.filter-dropdown-content{
+    /* background: #0b5ed1ea; */
+    background: var(--app-theme);
+    top: 35px;
+    right: -8px;
+    width: 200px;
+    position: absolute;
+    display: none;
+    animation: .5s meGrowIn .1s forwards 1;
+    opacity: 0;
+    z-index: 2;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.filter-dropdown-content > a{
+    display: block;
+    color: white !important;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 15px 12px;
+    /* padding: 10px 10px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.filter-dropdown-content > a:nth-child(even){
+    padding: 0 12px;
+}
+
+.filter-dropdown-content > a > p{
+    color: white;
+}
+
+.filter-dropdown-content > a:hover{
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.filter-dropdown.show > .filter-dropdown-content{
+    display: block;
+}
+
+.filter-submit-btn{
+    width: 100%;
+    border: none;
+    padding: 8px;
+    color: black;
+    background: #fff;
+}
+
+.filter-submit-btn:hover{
+    color: black;
+}
+
+.library-content{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    position: relative;
+}
+
+@media screen and (max-width: 1200px){
+    .library-header{
+
+    }
+
+    .library-header > h2{
+        font-size: 30px;
+    }
+}
+
+
+@media screen and (max-width: 992px){
+    .library-header{
+
+    }
+
+    .library-header > h2{
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .library-header{
+        flex-direction: column;
+    }
+
+    .library-header > h2{
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .library-header > form{
+        width: 100%;
+        margin-top: 25px;
+    }
+
+        
+    .library-content{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+
+@media screen and (max-width: 575px){
+    .library-content{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+}

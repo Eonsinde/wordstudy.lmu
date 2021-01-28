@@ -8,13 +8,7 @@ from django.utils import timezone
 class Excos(models.Model):
     name = models.CharField(max_length=500)
     photo = models.ImageField(upload_to='excos')
-    POSTS = (
-        ('l', 'Leader'),
-        ('gs', 'General Secretary'),
-        ('li', 'Librarian'),
-        ('', 'Not Specified')
-    )
-    post = models.CharField(default='', choices=POSTS, max_length=5)
+    post = models.CharField(default='', max_length=5, blank=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -74,7 +68,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='books')
+    file = models.FileField(upload_to='books', null=True, blank=True)
 
     def __str__(self):
         return f'{self.title}'

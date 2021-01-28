@@ -1,0 +1,181 @@
+:root {
+    --blue: #4e73df;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #e74a3b;
+    --orange: #fd7e14;
+    --yellow: #f6c23e;
+    --green: #1cc88a;
+    --teal: #20c9a6;
+    --cyan: #36b9cc;
+    --white: #fff;
+    --gray: #858796;
+    --gray-dark: #5a5c69;
+    --primary: #4e73df;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --light: #f8f9fc;
+    --dark: #5a5c69;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.login-wrapper{
+    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    height: 100vh;
+    width: 100vw;
+    background: var(--blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-form{
+    background: white;
+    padding: 25px 23px 30px 23px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 30%;
+    border: 1px whitesmoke solid;
+    border-radius: 2px;
+}
+
+.login-form-header{
+    margin: 0 0 35px 0;
+}
+
+.login-form-header-text{
+    margin: 10px auto;
+}
+
+.login-form-header-sub-text{
+    position: relative;
+    font-size: 1rem;
+}
+
+.login-form-header-sub-text::before,
+.login-form-header-sub-text::after{
+    content: '';
+    position: absolute;
+    top: calc(100% - 50%);
+    left: -40px;
+    height: 1px;
+    width: 30px;
+    background: #ccc;
+}
+
+.login-form-header-sub-text::after{
+    /* left: 0; */
+    left: 100px;
+}
+
+
+
+.login-form > div.form-sect{
+    margin: 0px 0px 25px 0px;
+}
+
+
+.form-sect{
+    border: 2px rgb(240, 239, 239) solid;
+    display: flex;
+    margin: 0px 0px 15px 0px;
+    color: rgb(80, 80, 80);
+    transition: .3s ease;
+}
+
+.form-sect:focus-within{
+    border-color: var(--blue);
+}
+
+.form-sect:focus-within > input{
+    color: rgb(80, 80, 80);
+}
+
+.form-sect > label{
+    background: var(--blue);
+    padding: 5px 15px;
+    margin: 0;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+}
+
+.form-sect > input{
+    margin: 0;  
+    padding: 10px 6px;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 1rem;
+    transition: .3s ease;
+}
+
+.form-sect:nth-child(3) > input{
+    border: none;
+}
+
+.form-sect > div.pswd-reveal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    /* border: 1px rgb(230, 230, 230) solid; */
+    cursor: pointer;
+    border-left: none;
+}
+
+.login-form input[type='submit']{
+    background: var(--blue);
+    padding: 12px;
+    border: none;
+    color: whitesmoke;
+    width: 100%;
+    transition: .5s ease;
+}
+
+input[type='submit']:hover{
+    color: whitesmoke;
+}
+
+.form-sect > div > a{
+    color: rgba(56, 56, 104, 0.651);
+}
+
+
+.login-form-footer{
+    letter-spacing: 2px;
+}
+
+@media screen and (max-width: 1200px){
+    .login-form{
+        width: 50%;
+    }
+
+    /* .login-form-header-sub-text{
+        width: 60%;
+        margin: 8px auto;
+    } */
+}
+
+@media screen and (max-width: 768px){
+    .login-form{
+        width: 70%;
+    }
+}
+
+
+@media screen and (max-width: 575px){
+    .login-form{
+        width: 90%;
+    }
+}

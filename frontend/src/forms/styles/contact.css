@@ -1,0 +1,189 @@
+.contact-section{
+    padding: 0px 0px 100px 0;
+}
+
+.contact-banner{
+    background: url('../../static/img/motivational_cover.jpg') center center/cover;
+    height: 350px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-banner::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 3, 3, 0.048);
+}
+
+.contact-banner > div{
+    z-index: 5;
+}
+
+.contact-banner > div > h1{
+    color: white;
+}
+
+.contact-banner > div > h1 > span{
+    color: rgb(236, 236, 236);
+    /* text-decoration: underline; */
+}
+
+.contact-body{
+    padding: 50px 0 0 0;
+    /* display: grid;
+    grid-template-columns: 70% 30%;
+    gap: 10px; */
+    /* background: red; */
+    /* column-gap: 10px; */
+}
+
+.contact-body > div:first-child{
+    /* border: 1px rgba(185, 185, 185, 0.315) solid; */
+}
+
+.contact-body > div:nth-child(2){
+    /* border: 1px rgba(185, 185, 185, 0.315) solid; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.contact-form{
+    border: 1px rgba(185, 185, 185, 0.315) solid;
+    /* border-radius: 5px; */
+    padding: 30px 20px;
+    line-height: initial;
+    background: #fff;
+
+}
+
+.contact-form label,
+.prayerbox-form label{
+    display: block;
+}
+
+.contact-form > div >  input,
+.prayerbox-form > div > input
+{
+    width: 100%;
+    padding: .55rem;
+    border: 1px #ccc solid;
+    outline: none;
+    transition: border-color .4s ease-in-out;
+}
+
+.contact-form > div >  input:focus-within,
+.prayerbox-form > div > input:focus-within
+{
+    border-color: var(--app-theme);
+}
+
+.contact-form > div > textarea,
+.prayerbox-form > div > textarea
+{
+    width: 100%;
+    padding: .55rem;
+    border: 1px #ccc solid;
+    outline: none;
+    transition: border-color .4s ease-in-out;
+}
+
+.contact-form > div > textarea:focus-within,
+.prayerbox-form > div > textarea:focus-within
+{
+    border-color: var(--app-theme);
+}
+
+.contact-form > div > input[type='submit']{
+    border: 1px var(--app-theme) solid;
+    width: initial;
+    background: var(--app-theme);
+    color: #fff;
+    padding: 15px;
+    outline: none;
+    transition: box-shadow .4s ease-in-out;
+}
+
+.contact-form > div > input[type='submit']:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.prayerbox-form{
+    /* box-shadow: 0 0 5px #000000bc; */
+    /* border-radius: 5px; */
+    border: 1px rgba(185, 185, 185, 0.315) solid;
+    padding: 30px 15px;
+    text-align: center; 
+    background: #fff;
+}
+
+
+.prayerbox-form > input[type='submit']{
+    border: 1px var(--app-theme) solid;
+    width: 100%;
+    color: #fff;
+    background: var(--app-theme);
+    padding: 8px;
+    outline: none;
+    transition: box-shadow .4s ease-in-out;
+}
+
+.prayerbox-form > input[type='submit']:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.additional-contact-details{
+    word-wrap: break-word;
+    padding: 30px 8px;
+    letter-spacing: 2px;
+    background: #fff;
+    border: 1px rgba(185, 185, 185, 0.315) solid;
+    margin-top: 30px;
+}
+
+.additional-contact-details > h5{
+    position: relative;
+    padding: 0;
+}
+
+.additional-contact-details > h5::before,
+.additional-contact-details > h5::after{
+    content: "";
+    position: absolute;
+    height: 1px;
+    background: #ccc;
+    width: 40%;
+    left: 0;
+    top: calc(100% - 50%);
+}
+
+.additional-contact-details > h5::after{
+    left: initial;
+    right: 0;
+}
+
+
+@media screen and (max-width: 1200px){
+    .contact-body{
+        grid-template-columns: 65% 35%;
+    }
+    
+    .prayerbox-form{
+        line-height: initial;
+    }
+    
+}
+
+@media screen and  (max-width: 768px){
+    .contact-body{
+        grid-template-columns: 100%;
+    }
+
+    .prayerbox-form{
+        margin-top: 30px;
+    }
+}

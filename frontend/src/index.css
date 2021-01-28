@@ -1,0 +1,92 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap'); */
+
+@font-face {
+    font-family: myFont;
+    src: url('./static/Poppins-Regular.ttf');
+}
+
+:root{
+    --app-theme: #208bc9;
+    --app-secondary-theme: rgb(218, 86, 25);
+    --app-teritary-theme: #18181a;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.text-app-theme{
+    color: #2d86b9;
+}
+
+.text-secondary-theme{
+    color:  rgb(218, 86, 25);
+}
+
+.text-teritary-theme{
+    color: #18181a;
+}
+
+.bg-app-theme{
+    background: #2d86b9;
+}
+
+.bg-secondary-theme{
+    background:  rgb(218, 86, 25);
+}
+
+.bg-teritary-theme{
+    background: #18181a;
+}
+
+
+body{
+    /* font-family: 'PT Sans', sans-serif; */
+    /* font-family: myFont, sans-serif; */
+    /* font-family: 'Special Elite', cursive; */
+    font-family: monospace;
+    /* letter-spacing: ; */
+    font-size: 1.2rem;
+    background: url('./static/img/background_main.jpg');
+    overflow-x: hidden;
+}
+
+.lock-scroll{
+    overflow-y: hidden;
+}
+
+
+/* for the breadcumbs of our application */
+.breadcrumbs-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.breadcrumbs-wrapper > h2.bread{
+    color: #fff;
+    font-size: 2rem;
+    font-family: "Lato", Arial, sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.breadcrumbs-wrapper > p.breadcrumbs{
+    text-transform: uppercase;
+    font-size: 17px;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    z-index: 99;
+    color: #fff;
+}
+
+p.breadcrumbs > span{
+    color: rgb(235, 235, 235);
+}
+
+p.breadcrumbs > span > a{
+    color: #fff;
+}

@@ -1,0 +1,42 @@
+.register-section{
+    padding: 0px 0px 130px 0;
+}
+
+.register-form{
+    padding: 38px 20px 45px 20px;
+    background: #fff;
+}
+
+.register-form  div.form-group >  input{
+    width: 100%;
+    padding: .45rem;
+    border: 1px #ccc solid;
+    outline: none;
+    transition: border-color .4s ease-in-out;
+}
+
+.register-form  div.form-group >  input:focus-within{
+    border-color: var(--app-theme);
+}
+
+.register-submit-btn{
+    border: 1px var(--app-theme) solid;
+    width: initial !important;
+    background: var(--app-theme);
+    color: #fff;
+    outline: none;
+    padding: 12px 15px;
+    transition: box-shadow .4s ease-in-out;
+}
+
+.register-submit-btn:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media screen and (max-width: 768px){
+        
+    .register-form{
+        padding: 38px 15px;
+    }
+
+}

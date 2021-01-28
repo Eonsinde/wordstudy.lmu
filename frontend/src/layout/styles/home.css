@@ -1,0 +1,371 @@
+
+/* for the banner section of the application */
+.banner-area{
+    position: relative;
+    background: url('../../static/img/awesome_bg.jpg') no-repeat center center/cover;
+}
+
+.banner-area::before{
+    content: "";
+    position: absolute;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 3, 3, 0.76);
+}
+
+@keyframes bannerContentAnime{
+    100%{
+        opacity: 1;
+        margin-top: 50px;
+    }
+}
+
+.banner-content{
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+    padding: 10px 0 ;
+    margin-top: 150px;
+    opacity: .3;
+    animation: 1s bannerContentAnime .1s forwards;
+}
+
+.banner-content > h5{
+    color:  var(--app-theme);
+    letter-spacing: 3px;
+    font-size: 20px;
+}
+
+.banner-content > h1{
+    font-size: 70px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: myFont, sans-serif;
+}
+
+.banner-content > p{
+    margin-bottom: 30px;
+}
+
+@keyframes bounce{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.banner-content > a{
+    color: #fff;
+    display: inline-block;
+    border: 2px #fff solid;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    width: 50px; 
+    height: 50px;
+    transition: .2s ease-in-out .2s;
+    animation: bounce 1s forwards 0.1s infinite;
+}
+
+.banner-content >  a > i{
+    font-size: 1.2rem;
+    /* width: 60px; */
+    /* height: 60px; */
+    position: absolute;
+    left: 10%; 
+    bottom: 0;
+    top: 31%;
+    right: 0;
+}
+
+.banner-content > a:hover{
+    text-decoration: none;
+    animation: none;
+}
+
+@media screen and (max-width: 768px){
+    .banner-content > h5{
+        color:  var(--app-theme);
+        letter-spacing: 3px;
+        font-size: 18px;
+    }
+
+    .banner-content > h1{
+        font-size: 60px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .banner-content > p{
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+}
+
+@media screen and (max-width: 575px){
+    .banner-content > h5{
+        color:  var(--app-theme);
+        letter-spacing: 3px;
+        font-size: 13px;
+    }
+
+    .banner-content > h1{
+        font-size: 60px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .banner-content > p{
+        font-size: 12px;
+        margin-bottom: 30px;
+    }
+
+}
+
+/* for all the addendums in the application */
+.addendum{
+    background: var(--app-theme);
+    padding: 15px 12px;
+    text-align: center;
+}
+
+.addendum.blue{
+    background: var(--app-theme);
+}
+
+.addendum >  *{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+
+
+/* for the welcome-section of our application */
+.welcome-section{
+    padding: 50px 0 70px 0;
+}
+
+.welcome-section > .container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome__line{
+    background: rgba(255, 255, 255, 0.219);
+    width: 9%;
+    margin: 25px auto;
+}
+
+
+/* for the briefing section of our application */
+.brief-section{
+    padding: 5em 0px;
+}
+
+.brief-items-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.card.briefing{
+    transition: .2s ease-in-out;
+    box-shadow: 0 0 20px #3a3a3a15;
+}
+
+.card.briefing:hover{
+    box-shadow: 0 0 20px #3a3a3a31;
+}
+
+@media screen and (max-width: 768px){
+    .brief-items-container{
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 10px;
+    }
+}
+
+
+/* for the word-talk section of our application */
+.wordtalk-section{
+}
+
+.wordtalk-content{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 600px;
+    /* grid-auto-rows: minmax(100px, auto); */
+}
+
+.single-word-content{
+    overflow: hidden;
+}
+
+.single-word-content.word{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.single-word-content > img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 768px){
+    .wordtalk-content{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .single-word-content:last-child{
+        grid-row: 3/4;
+    }
+}
+
+
+@media screen and (max-width: 575px){
+   
+}
+
+
+/* excos section of the application */
+.excos-section{
+    background: rgb(245, 245, 245);
+    padding: 80px 0 100px 0;
+}
+
+.excos-header{
+    margin-bottom: 25px;
+}
+
+.owl-item{
+    opacity: .5;
+    transition: opacity .2s ease-in-out;
+}
+
+.owl-item.active{
+    opacity: 1;
+}
+
+.single-exco.card{
+    /* box-shadow: 0 0 5px #333; */
+    /* background: #136291; */
+    border: none;
+}
+
+@media screen and (max-width: 768px){
+    .excos > div > .card{
+        /* border: none;
+        height: 50%; */
+    }
+}
+
+
+/* for the event section of our application */
+.event-section{
+    /* background: rgb(218, 86, 25); */
+    background: var(--app-theme);
+    padding: 40px 0;
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.event-section > .container{
+    z-index: 1;
+}
+
+.event-section > img{
+    position: absolute;
+    height: 400px;
+    width: auto;
+    z-index: 0;
+    top: -20%;
+}
+
+.event-section h3{
+    z-index: 1;
+    /* background: red; */
+}
+
+
+/* for the showcase section our application */
+
+.showcase-section{
+    padding: 4em 0px 8em 0px;
+}
+
+.showcase__line{
+    background: initial;
+    width: 25%;
+    margin: 10px auto 30px auto;
+}
+
+.showcase{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(auto, 300px);
+}
+
+.fam-item{
+    background: #333;
+    /* box-shadow: 0 2px 5px #000000bc; */
+    overflow: hidden;
+}
+
+.fam-item > img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: .5s ease;
+}
+
+.fam-item > img:hover{
+    transform: scale(1.1);
+}
+
+.fam-item-1{
+    grid-column: 1/3;
+}
+
+.fam-item-2{
+    grid-column: 3/4;
+    grid-row: 1/3;
+}
+
+.fam-item-3{
+   
+}
+
+.fam-item-4{
+
+}
+
+@media screen and (max-width: 768px){
+    .showcase{
+        grid-template-columns: repeat(1, 1fr);
+    }
+        
+    .fam-item-1{
+        grid-column: inherit;
+    }
+
+    .fam-item-2{
+        grid-column: inherit;
+        grid-row: inherit;
+    }
+}

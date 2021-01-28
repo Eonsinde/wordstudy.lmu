@@ -18,7 +18,8 @@ body{
 }
 
 .bg-app-theme{
-    background: rgb(31, 37, 53);
+    /* background: rgb(31, 37, 53); */
+    background: rgb(35, 40, 59);
 }
 
 .my-btn{
@@ -83,19 +84,19 @@ b{
     right: 30px;
     bottom: 0;
     z-index: 2;
-    background: rgb(48, 53, 65);
+    background: rgb(100, 100, 100);
     color: rgb(248, 248, 248);
     text-align: center;
-    height: 6%;
-    width: 4%;
+    height: 45px;
+    width: 45px;
     border: none;
-    transition: .5s ease-in-out;
-    border-radius: 2px;
+    border-radius: 100%;
     transition: all .5s ease;
 }
 
 .scroll-top-btn:hover{
     box-shadow: 0 0 20px #000000bc;
+    outline: none;
 }
 
 /* for the navbar section */
@@ -131,58 +132,18 @@ b{
     border-bottom: 1px #ccc solid;
 }
 
-/* for my actual nav bar */
-/* .my-navbar{
-    height: 50px;
-}
-
-.navbar-brand{
-    float: left;
-    box-sizing: border-box;
-}
-
-.my-navbar-toggler{
-    display: none;
-}
-
-.my-navbar-nav{
-    float: right;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    background: royalblue;
-    height: 50px;
-}
-
-.my-nav-item{
-    display: inline;
-    margin: 0px .7pc;
-}
-
-.my-nav-link{
-    color: whitesmoke;
-    border-bottom: 1px transparent solid;
-    transition: .5s ease;
-}
-
-.my-nav-link:hover{
-    text-decoration: none;
-    color: #ccc;
-    border-bottom: 1px #ccc solid;
-} */
-
-
 
 /* for the carousel section */
 .myCarouselContainer{
     margin: auto;
-    width: 85%;
+    width: 88%;
 }
 
 #myCarousel{
     height: 620px;
     /* background: rgb(38, 38, 43); */
-    background: rgb(33, 33, 36);
+    /* background: rgb(33, 33, 36); */
+    background: rgb(59, 59, 66);
     z-index: 1;
     box-shadow: 0 5px 10px #000000bc;
     padding: 10px 10px;
@@ -216,7 +177,30 @@ b{
 /* brief section */
 .brief-section{
     color: whitesmoke;
-    border-bottom: 10px rgb(38, 38, 43) solid;
+    /* border-bottom: 10px rgb(38, 38, 43) solid; */
+    border-bottom: 10px rgb(59, 59, 66) solid;
+}
+
+.brief-items-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+}
+
+.briefing{
+    background: rgb(59, 59, 66);
+    transition: .5s ease;
+}
+
+.briefing:hover{
+    background: rgb(73, 73, 82);
+}
+
+.briefing-icon{
+    margin: 10px 0;
+}
+
+.brief-items-container > div{
 }
 
 /* word talk section */
@@ -229,7 +213,7 @@ b{
 /* excos section */
 .excos-section{
     padding: 3pc;
-    border-bottom: 10px rgb(38, 38, 43) solid;
+    border-bottom: 10px rgb(59, 59, 66) solid;
 }
 
 
@@ -276,7 +260,7 @@ b{
 
 /* for the passion showcase section */
 .passion-section{
-    border-bottom: 10px rgb(38, 38, 43) solid;
+    border-bottom: 10px rgb(59, 59, 66) solid;
 }
 
 .passions-container{
@@ -360,7 +344,7 @@ section.passion-showcase-item{
 .event-section{
     padding: 50px 0px;
     /* margin: 50px 0px; */
-    border-bottom: 10px rgb(38, 38, 43) solid;
+    border-bottom: 10px rgb(59, 59, 66) solid;
 
 }
 
@@ -405,14 +389,9 @@ footer{
 
 /* media queries of our application */
 @media screen and (max-width:768px){
-    .scroll-top-btn{
-        width: 8%;
-    }
-
     .message-box{
         width: 40%;
     }
-
 
     /* for my nav bar responsiveness */
     .my-navbar{
@@ -459,6 +438,11 @@ footer{
 
     #myCarousel{
         height: 500px;
+    }
+
+    /* for the briefing section */
+    .brief-items-container{
+        grid-template-columns: repeat(1, 1fr);
     }
 
 
@@ -519,8 +503,6 @@ footer{
 }
 
 @media screen and (max-width: 530px){
-    .scroll-top-btn{
-        width: 15%;
-    }
+  
 
 }

@@ -1,0 +1,222 @@
+
+/* for the navbar section of the application */
+.nav-container{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0;
+    z-index: 100;
+    transition: padding .4s ease-in-out;
+}
+
+.nav-container.set-fixed-with-blue-bg{
+    background: var(--app-theme);
+    height: 55px;
+}
+
+.nav-container.my-scroll-navbar{
+    padding: 0;
+    background: var(--app-theme);
+    box-shadow: 0 0 10px rgb(49, 49, 49);
+}
+
+.nav-container > .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand{
+    color: white;
+    font-weight: 500;
+    font-size: 1.25rem;
+    transition: .2s ease;
+}
+
+.navbar-brand > img{
+	height: 50px;
+	width: 65px;
+	margin: 0;	
+}
+
+
+.my-navbar-toggler{
+    height: 30px;
+    width: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    backface-visibility: hidden;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.hamburger-line{
+    height: 1px;
+    width: 100%;
+    background: white;
+    position: relative;
+    transition: transform .5s ease;
+    z-index: 2;
+}
+
+.hamburger-line::before, .hamburger-line::after{
+    content: '';
+    height: 1px;
+    width: 100%;
+    background: white;
+    position: absolute;
+}
+
+.hamburger-line::before{
+    margin-top: -10px;
+}
+
+.hamburger-line::after{
+    margin-top: 10px;
+}
+
+.my-navbar-toggler.change-to-close > .hamburger-line{
+    transform: rotate(-135deg);
+}
+
+.my-navbar-toggler.change-to-close .hamburger-line::before, 
+.my-navbar-toggler.change-to-close  .hamburger-line::after
+{
+    margin: 0;
+    transform: rotate(90deg);
+}
+
+ul.my-navbar-nav{
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+li.nav-item{
+    margin: 0 0 0 8px;
+}
+
+li.nav-item:hover a.nav-link{
+    color: var(--app-theme);
+}
+
+.nav-container.set-fixed-with-blue-bg li.nav-item:hover > a.nav-link,
+.nav-container.my-scroll-navbar li.nav-item:hover > a.nav-link{
+    color: #ccc;
+}
+
+a.nav-link{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: .8rem;
+    transition: color .5s ease-in-out;
+    letter-spacing: 1px;
+}
+
+.nav-social-icons{
+    display: none;
+}
+
+
+
+
+/* for responsiveness of the navbar application */
+@media screen and (max-width: 767px){
+    .nav-container > .container{
+        flex-wrap: wrap;
+    }
+
+    .my-navbar-toggler{
+        visibility: visible;
+        z-index: 3;
+    }
+        
+    .my-navbar-toggler.change-to-close > .hamburger-line{
+        transform: rotate(-135deg);
+    }
+
+    .my-navbar-collapse{
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;   
+        width: 35%;
+        transform: translateX(-100%);
+        background:#18181a;
+        transition: all .5s ease-in-out 0s;
+        z-index: 3;
+    }
+
+    /* @keyframes translateIn{
+        100%{
+            transform: translateX(0%);
+            box-shadow: 0 0 20px #000000bc;
+        }
+    } */
+
+    .my-navbar-collapse.small-scr{
+        /* animation: translateIn .5s forwards 0s 1; */
+        transform: translateX(0%);
+        box-shadow: 0 0 20px #000000bc;
+    }
+
+    .my-navbar-nav{
+        height: 80%;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    li.nav-item{
+        margin: 1em 0;
+    }
+
+    .my-navbar-nav li.nav-item > .nav-link{
+        font-size: 1rem;
+    }
+
+    .my-navbar-nav li.nav-item:hover a.nav-link{
+        color: var(--app-theme) !important; 
+    }
+
+    .nav-social-icons{
+        text-align: center;
+        display: block;
+        height: 20%;
+        background:#18181a;
+        padding: 10px 0;
+    }
+
+    .nav-social-icon{
+        font-size: 1.1rem;
+        margin: 0 8px;
+        color: white;
+        transition: .5s ease;
+    }
+}
+
+@media screen and (max-width: 575px){
+    .my-navbar-collapse{
+        width: 45%;
+    }
+
+    .nav-social-icons{
+        text-align: center;
+        display: block;
+        height: 20%;
+        background:#18181a;
+        padding: 8px 0;
+    }
+
+    .nav-social-icon{
+        font-size: 1.2rem;
+        margin: 0 8px;
+        color: white;
+        transition: .5s ease;
+    }
+}
+

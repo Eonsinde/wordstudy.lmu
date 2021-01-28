@@ -1,11 +1,27 @@
 from django.urls import path
 from wordstudy import views
+from django.urls import path, include
+
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+
+router.register(r'authors', views.AuthorViewSet)
+router.register(r'genres', views.GenreViewSet)
+router.register(r'books', views.BookViewSet)
+router.register(r'excos', views.ExcosViewSet)
+router.register(r'contact', views.ContactViewSet)
+router.register(r'members', views.MemberViewSet)
+router.register(r'prayer-request', views.PrayerBoxViewSet)
 
 
 urlpatterns = [
-    path('', views.index, name='home'),
+    # path('', views.index, name='home'),
+    path('', include(router.urls)),
+    path('home', views.index, name='home'),
     path('explore/', views.explore, name='explore'),
-    path('contact/', views.contact, name='contact'),
+    path('contact-us/', views.contact, name='contact'),
     path('join/', views.join, name='join'),
     path('search/', views.search, name='search'),
     path('details/<str:category>/', views.details, name='details'),
