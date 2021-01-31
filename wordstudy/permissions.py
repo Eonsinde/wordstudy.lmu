@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 
-class MakeChangesOrCreateBook(permissions.BasePermission):
+class MakeChangesOrCreate(permissions.BasePermission):
     """allows admin users only to create, update and delete Books"""
 
     def has_object_permission(self, request, view, obj):  # for object specific modification method like PUT, PATCH, DEL

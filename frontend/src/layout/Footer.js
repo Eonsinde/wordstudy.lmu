@@ -11,6 +11,7 @@ const Footer = () => {
                     <h5 className='mb-3'>Follow Us</h5>
                     <p className='text-white-50'>Let us be social</p>
                     <div className="social-icons">
+                        {/* add their actual social links */}
                         <Link to="#" className="social-icon"><i className="fab fa-facebook-square"></i></Link>
                         <Link to="#" className="social-icon"><i className="fab fa-instagram"></i></Link>
                         <Link to="#" className='social-icon'><i className="fab fa-twitter"></i></Link>

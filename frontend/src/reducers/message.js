@@ -5,7 +5,7 @@ let initialState = {};
 
 
 const message = (state=initialState, action) => {
-    switch (action.payload){
+    switch (action.type){
         case CREATE_MESSAGE:
             return (state=action.payload);
         default:

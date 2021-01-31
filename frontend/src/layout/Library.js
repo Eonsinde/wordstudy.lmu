@@ -12,8 +12,8 @@ import './styles/library.css';
 
 const Library = ({ books, categories, getBooks, getCategories, setStateQuery, isLoading: booksLoading, isFiltering: filteringBooks }) => {
 
-    let [selectedFilter, setSelectedFilter] = useState(''); 
-    let [filter, setFilter] = useState('');
+    // let [selectedFilter, setSelectedFilter] = useState(''); 
+    // let [filter, setFilter] = useState('');
     let [query, setQuery] = useState('');
     let [dropDownShow, setDropDownShow] = useState(false);
    
@@ -46,10 +46,10 @@ const Library = ({ books, categories, getBooks, getCategories, setStateQuery, is
             </header>
             <div className='container'>
                 <header className="library-filter-section d-flex justify-content-between align-items-center py-4">
-                    <p className="p-0 m-0 text-dark text-capitalize text-lg-left text-md-left text-sm-center text-center">Category:- <span className='text-app-theme font-italic'>{selectedFilter === '' ? 'All' : selectedFilter}</span></p>
+                    <p className="p-0 m-0 text-dark text-capitalize text-lg-left text-md-left text-sm-center text-center">Category:- <span className='text-app-theme font-italic'>All</span></p>
                     <div className={`filter-dropdown ${dropDownShow ? 'show' : ''}`}>
                         <Link to="#" onClick={() => setDropDownShow(!dropDownShow)} className="filter-link">Filters <i className='fas fa-filter'></i></Link> 
-                        <form className='filter-dropdown-content'>
+                        <form className='filter-dropdown-content' onSubmit={e => e.preventDefault()}>
                             <Link to='#' key={0}>
                                 <span to="#">All</span> 
                                 <input type='checkbox' value='' />                                
@@ -58,33 +58,20 @@ const Library = ({ books, categories, getBooks, getCategories, setStateQuery, is
                                 categories.map(cat => 
                                     <Link to='#' key={cat.id}>
                                         <span to="#">{cat.name}</span> 
-                                        <input type='checkbox' onClick={(e) => setFilter(e.target.value)} value={cat.id} />                                
+                                        <input type='checkbox' value={cat.id} />                                
                                     </Link>    
                                 )
                             }
                             <button className='filter-submit-btn' type='submit'>apply</button>
                         </form>
                     </div>
-                    {/* <Dropdown className='filter-dropdown' alignRight={true}>
-                        <Dropdown.Toggle className='filter-link' id="dropdown-basic">
-                            Filters <i className='fas fa-filter'></i>
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            {categories.map(cat => 
-                                <a key={cat.id}>
-                                    <span to="#">{cat.name}</span> 
-                                    <input type='checkbox' value={cat.id} />                                
-                                </a>    
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown> */}
+        
                 </header>
                 <main className='library-content'>
                     {
                         (booksLoading || filteringBooks)
                         ?
-                        <Preloader /> 
+                        <Preloader size='md' /> 
                         :
                         !filteringBooks && books.length === 0 // incase nothing is found
                         ?

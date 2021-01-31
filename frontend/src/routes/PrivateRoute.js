@@ -1,5 +1,6 @@
 import { Route, Redirect } from 'react-router-dom';
-import AdMain from '../admin/AdMain';
+import {connect} from 'react-redux';
+import AdMain from '../admin/layout/AdMain';
 
 
 
@@ -11,7 +12,11 @@ const PrivateRoute = ({isAuthenticated, component:Component, ...rest}) => {
                 return <AdMain comp={Component} {...props} />
             }}
         />
-    return <Redirect to='/management' />
+    return <Redirect to='/admin-login' />
 } 
 
-export default PrivateRoute;
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps)(PrivateRoute);

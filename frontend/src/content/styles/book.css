@@ -1,15 +1,24 @@
 .card{
     z-index: 1 !important;
+    position: relative;
 }
 
 
 .download-btn{
-    border: 1px var(--app-theme) solid;
-    color: var(--app-theme);
+    position: absolute;
+    right: 0;
+    border: 1px rgba(204, 204, 204, 0.13) solid;
+    background: #fff;
+    color: #343140;
+    padding: .6rem .7rem;
+    transition: background .2s ease-in-out;
 }
 
 .download-btn:hover{
-    color: #fff;
-    background: var(--app-theme);
-    box-shadow: 0 0 5px var(--app-theme);
+    /* color: #fff; */
+    /* background: #343a40; */
+    /* background: var(--app-theme); */
+    background: rgb(236, 236, 236);
+    color:  #343140;
+    text-decoration: none;
 }

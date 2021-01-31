@@ -1,26 +1,31 @@
-// for categories
+// for categories or
+// for genres
 export const GET_CATEGORIES = 'GET_CATEGORIES';
-export const DELETE_CATEGORY = 'DELETE_CATEGORY';
-export const ADD_CATEGORY = 'ADD_CATEGORY';
-export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+export const DELETE_GENRE = 'DELETE_GENRE';
+export const ADD_GENRE = 'ADD_GENRE';
+export const EDIT_GENRE = 'EDIT_GENRE';
 
 // for books
 export const BOOKS_LOADING = 'BOOKS_LOADING';
 export const BOOKS_LOADED = 'BOOKS_LOADED';
-export const GET_BOOKS = 'GET_BOOKS';
-export const GET_BOOK = 'GET_BOOK';
 export const DELETE_BOOK = 'DELETE_BOOK';
 export const ADD_BOOK = 'ADD_BOOK';
 export const EDIT_BOOK = 'EDIT_BOOK';
 
-// for books
+// for excos
 export const EXCOS_LOADING = 'EXCOS_LOADING';
 export const EXCOS_LOADED = 'EXCOS_LOADED';
-export const GET_EXCOS = 'GET_EXCOS';
-export const GET_EXCO = 'GET_EXCO';
 export const DELETE_EXCO = 'DELETE_EXCO';
 export const ADD_EXCO = 'ADD_EXCO';
 export const EDIT_EXCO = 'EDIT_EXCO';
+
+// for events
+export const GET_EVENTS = 'GET_EVENTS';
+export const DELETE_EVENT = 'DELETE_EVENT';
+export const ADD_EVENT = 'ADD_EVENT';
+export const EDIT_EVENT = 'EDIT_EVENT';
+
+
 
 // for filters and search
 export const SET_TEXT_FILTER = 'SET_TEXT_FILTER';

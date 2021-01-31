@@ -2,6 +2,10 @@ import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import './styles/register.css';
 
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
+
 
 const Register = () => {
     let [name, setName] = useState('');
@@ -16,7 +20,38 @@ const Register = () => {
 
     const handleRegisterSubmit = () => {
         if (name === '' || email === '' || department === '' || roomNo === '' || dateOfBirth === ''){
-            alert('Please fill in all fields');
+            Toast.fire({
+                icon: 'error',
+                title: "Please fill in all fields"
+            });
+        }else{
+            let postData = {
+                name: name,
+                email: email,
+                department: department,
+                room_no: roomNo,
+                date_of_birth: dateOfBirth
+            }
+
+            const config = {
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            }
+            
+            axios.post('/members/', postData, config)
+                .then(res => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: `Registration successful`
+                    });
+                })
+                .catch(() => 
+                    Toast.fire({
+                        icon: 'error',
+                        title: `Failed to send`
+                    })
+                );
         }
     }
 
@@ -56,7 +91,7 @@ const Register = () => {
                         </div>
                         <div className="form-group col-md-6">
                             <label htmlFor="date-joined">Date Joined</label>
-                            <input type="text" defaultValue={`${ Date().toString() }`} className="" />
+                            <input type="text" defaultValue={`${ Date().toString() }`} disabled className="" />
                             <small className="text-muted"><i>This is automatically added</i></small>
                         </div>
                     </div>
@@ -68,5 +103,17 @@ const Register = () => {
         </section>
     );
 }
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
  
 export default Register;

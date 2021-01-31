@@ -1,7 +1,5 @@
 import { useState, useEffect} from 'react';
-import {connect, useSelector} from 'react-redux';
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
 
 import './styles/home.css';
 
@@ -10,10 +8,8 @@ import famimg2 from '../static/img/fam_preview2.JPG';
 import famimg1 from '../static/img/fam_preview1.jpg';
 import famimg4 from '../static/img/fam_preview4.JPG';
 
-// import leaderImg from '../static/img/PASTOR_TOPE_NO_BG2.png';
 import leaderImg from '../static/img/PASTOR_TOPE.jpg';
 import worshipImg from '../static/img/perfect.jpg';
-import excosImg from '../static/img/excos/DSC_0070.JPG';
 
 
 import OwlCarousel from 'react-owl-carousel';  
@@ -21,13 +17,15 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';  
 
 import Preloader from '../content/Preloader';
-import {getExcos} from '../actions/exco';
 
 
-const Home = ({getExcos}) => {
+const Home = () => {
 
     let [excos, setExcos] = useState([]);
     let [excosLoading, setExcosLoading] = useState(true);
+
+    let [events, setEvents] = useState([]);
+    let [eventsLoading, setEventsLoading] = useState(true);
 
     useEffect(() => {
         document.title = 'Word Study | Home';
@@ -35,14 +33,21 @@ const Home = ({getExcos}) => {
         // all the get request
         const fetchExcos = async () => {
             const result = await axios(`/excos`);
-            console.log(result.data);
 
             setExcos(result.data);
             setExcosLoading(false);
         }
 
+        const fetchEvents = async () => {
+            const result = await axios.get(`/events`);
+
+            setEvents(result.data);
+            setEventsLoading(false);
+        }
+
         fetchExcos();
-    }, []);
+        fetchEvents();
+    }, [excosLoading, eventsLoading]);
 
     return ( 
         <>
@@ -126,27 +131,6 @@ const Home = ({getExcos}) => {
                 <h3>Get access to several spiritual and motivational books for free</h3>
             </div> */}
 
-          
-
-            {/* <section className="wordtalk-section">
-                <div className="container">
-                    <div className="wordtalk-content">
-                        <img src={leaderImg} alt="not found" />
-                        <div className="wordtalk-content-body shadow-sm">
-                            <header className="wordtalk-header text-center mb-4">
-                                <h4 className="text-uppercase text-white">A word from our spiritual leader</h4>
-                            </header>
-                            <main className='text-center'>
-                                <p className="text-white-50">
-                                    Welcome to word study family website.  This is basically me prototyping. There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain. There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain
-                                </p>
-                                <h5 className="text-white">Pastor Tope Johnson</h5>
-                            </main>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
-
             <section className="wordtalk-section bg-secondar-theme">
                 <div className="wordtalk-content bg-white">
                     <div className='single-word-content'>
@@ -210,8 +194,10 @@ const Home = ({getExcos}) => {
                         }}
                         margin={10}>
                         {
-                            !excosLoading
+                            excosLoading
                             ?
+                            <Preloader size='lg' />
+                            :
                             excos.map(exco => 
                                 <div key={exco.id} className="item mb-2">
                                     <div className="single-exco card shadow-sm">
@@ -219,14 +205,12 @@ const Home = ({getExcos}) => {
                                         <div className="card-body">
                                             <p className="card-text text-dark text-uppercase text-center">
                                                 Name: {exco.name} <br />
-                                                Post: { exco.post.length > 10 ? <span title={`${exco.post}`}>{exco.post.slice(0, 10) + '...'}</span> : exco.post }
+                                                Post: { exco.post.length > 18 ? <span title={`${exco.post}`}>{exco.post.slice(0, 18) + '...'}</span> : exco.post }
                                             </p>
                                         </div>
                                     </div>
                                 </div> 
                             ) 
-                            :
-                            <Preloader/>
                         } 
                     </OwlCarousel>
                 </div>
@@ -266,72 +250,27 @@ const Home = ({getExcos}) => {
                                 }
                         }}
                         margin={10} >  
-                        <div className="item">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="card-text text-uppercase text-center">
-                                        <h5>Tuesday Fellowship Meeting</h5>
-                                        <p>Venue: In Front Of University Chapel</p>
-                                        <p>Duration: 6:10pm - 7:45pm</p>
+                        {
+                            eventsLoading
+                            ?
+                            <Preloader />
+                            :
+                            events.map(event => (
+                                <div className="item">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="card-text text-uppercase text-center">
+                                                <h5>{event.title}</h5>
+                                                <p>Venue: {event.venue}</p>
+                                                <p>Time: {event.time.slice(0, 5)}</p>
+                                                <p>Date: {event.date}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="card-text text-uppercase text-center">
-                                        <h5>Tuesday Fellowship Meeting</h5>
-                                        <p>Venue: In Front Of University Chapel</p>
-                                        <p>Duration: 6:10pm - 7:45pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="card-text text-uppercase text-center">
-                                        <h5>Tuesday Fellowship Meeting</h5>
-                                        <p>Venue: In Front Of University Chapel</p>
-                                        <p>Duration: 6:10pm - 7:45pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="card-text text-uppercase text-center">
-                                        <h5>Tuesday Fellowship Meeting</h5>
-                                        <p>Venue: In Front Of University Chapel</p>
-                                        <p>Duration: 6:10pm - 7:45pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="card-text text-uppercase text-center">
-                                        <h5>Tuesday Fellowship Meeting</h5>
-                                        <p>Venue: In Front Of University Chapel</p>
-                                        <p>Duration: 6:10pm - 7:45pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="card">
-                                <div className="card-body">
-                                    <div className="card-text text-uppercase text-center">
-                                        <h5>Tuesday Fellowship Meeting</h5>
-                                        <p>Venue: In Front Of University Chapel</p>
-                                        <p>Duration: 6:10pm - 7:45pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            ))
+                        }
+                        
                     </OwlCarousel>  
                 </div>
             </section>
@@ -339,8 +278,5 @@ const Home = ({getExcos}) => {
     );
 }
 
-const mapStateToProps = state => ({
-    excos: state.exco.excos_list
-});
  
-export default connect(mapStateToProps, {getExcos})(Home);
+export default Home;

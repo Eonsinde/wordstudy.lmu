@@ -2,6 +2,7 @@ from wordstudy.models import *
 from rest_framework import serializers
 from rest_framework import status
 from rest_framework import exceptions
+import json
 
 
 class ExcosSerializer(serializers.ModelSerializer):
@@ -34,15 +35,8 @@ class GenreSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Author
-        fields = '__all__'
-
-
 class BookSerializer(serializers.ModelSerializer):
     genre = GenreSerializer()
-    author = AuthorSerializer()
 
     class Meta:
         model = Book
@@ -50,31 +44,42 @@ class BookSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'read_only': True}}
 
     def validate(self, attrs):
-        genre_name = attrs['genre']['name']
-        author_name = attrs['author']['name']
+        if attrs.get('genre'):
+            genre_name = attrs['genre']['name']
 
-        try:  # check if the exist
-            Genre.objects.get(name__icontains=genre_name)
-            Author.objects.get(name__icontains=author_name)
-        except Author.DoesNotExist:
-            print('Author not found')
-            raise exceptions.ValidationError([exceptions.status.HTTP_400_BAD_REQUEST])
-        except Genre.DoesNotExist:
-            print('Genre not found')
-            raise exceptions.ValidationError([exceptions.status.HTTP_400_BAD_REQUEST])
-        else:
-            return attrs
+            try:  # check if the exist
+                Genre.objects.get(name__icontains=genre_name)
+            except Genre.DoesNotExist:
+                raise exceptions.ValidationError([exceptions.status.HTTP_400_BAD_REQUEST])
+            else:
+                return attrs
+        return attrs
 
     def create(self, validated_data):
         genre_name = validated_data['genre']['name']
-        author_name = validated_data['author']['name']
 
         genre = Genre.objects.get(name__icontains=genre_name)
-        author = Author.objects.get(name__icontains=author_name)
 
-        book = Book.objects.create(title=validated_data['title'], genre=genre, author=author)
+        book = Book.objects.create(title=validated_data['title'], author=validated_data['author'], genre=genre,
+                                   file=validated_data['file'])
 
         return book
+
+    def update(self, instance, validated_data):
+        if validated_data.get('title'):
+            instance.title = validated_data['title']
+        if validated_data.get('author'):
+            instance.author = validated_data['author']
+        if validated_data.get('file'):
+            instance.file = validated_data['file']
+        if validated_data.get('genre'):
+            genre_name = validated_data['genre']['name']
+            genre = Genre.objects.get(name__icontains=genre_name)
+            instance.genre = genre
+
+        instance.save()
+
+        return instance
 
 
 class PrayerBoxSerializer(serializers.ModelSerializer):

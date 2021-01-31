@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import './styles/contact.css';
 
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const Contact = () => {
     
@@ -19,15 +21,66 @@ const Contact = () => {
         document.title = 'Word Study | Contact';
     }, [])
 
+    const config = {
+        headers : {
+            'Content-Type': 'application/json'
+        }
+    }
+
     const handleContactSubmit = () => {
         if (name === '' || email === '' || subject === '' || message === ''){
-            alert('Please Fill in all fields');
+            Toast.fire({
+                icon: 'error',
+                title: "Please fill in all fields"
+            });
+        }else{
+            let postData = {
+                name: name,
+                email: email,
+                subject: subject,
+                message: message
+            }
+            axios.post('/contact/', postData, config)
+                .then(res => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: `Message Sent, ${res.data.name}`
+                    });
+                })
+                .catch(() => 
+                    Toast.fire({
+                        icon: 'error',
+                        title: `Failed to send`
+                    })
+                );
         }
     }
 
     const handlePrayerSubmit = () => {
         if (personName === '' || prayerReq === ''){
-            alert('Please Fill in all fields');
+            Toast.fire({
+                icon: 'error',
+                title: "Please fill in all fields"
+            });
+        }else{
+            let postData = {
+                name: personName,
+                prayer_point: prayerReq,
+            }
+            
+            axios.post('/prayer-request/', postData, config)
+                .then(res => {
+                    Toast.fire({
+                        icon: 'success',
+                        title: `Prayers Sent, ${res.data.name}`
+                    });
+                })
+                .catch(() => 
+                    Toast.fire({
+                        icon: 'error',
+                        title: `Failed to send`
+                    })
+                );
         }
     }
 
@@ -35,8 +88,8 @@ const Contact = () => {
         <section className="contact-section">
             <header className='contact-banner'>
                 <main className='breadcrumbs-wrapper mb-3'>
-                    <h2 class="mb-2 bread">Contact Us</h2>
-                    <p class="breadcrumbs"><span class="mr-2"><Link to="/">Home</Link></span> / <span>Contact</span></p>
+                    <h2 className="mb-2 bread">Contact Us</h2>
+                    <p className="breadcrumbs"><span className="mr-2"><Link to="/">Home</Link></span> / <span>Contact</span></p>
                 </main>
             </header>
             <div className="container">
@@ -89,10 +142,21 @@ const Contact = () => {
                         </section>
                     </div>
                 </div>
-                
             </div>
         </section>
     );
 }
  
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
+
 export default Contact;

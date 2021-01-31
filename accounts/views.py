@@ -21,7 +21,7 @@ class UserAPI(generics.RetrieveAPIView):
         return self.request.user
 
 
-class ProfileAPI(viewsets.ModelViewSet):
+class ProfileAPI(generics.GenericAPIView):
     """ to edit, update and deactivate profile or account """
 
     serializer_class = UserSerializer
@@ -62,7 +62,7 @@ class RegisterAPI(generics.ListCreateAPIView):  # to create a user account
             'email': request.data.get('email'),
             'first_name': request.data.get('first_name'),
             'last_name': request.data.get('last_name'),
-            'profile': json.loads(request.data.get('profile'))
+            'profile': request.data.get('profile') if type(request.data.get('profile')) == dict else json.loads(request.data.get('profile'))
         }
 
         if request.data.get('actual-img') != 'null':

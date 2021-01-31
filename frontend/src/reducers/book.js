@@ -44,11 +44,20 @@ const book = (state=initialState, action) => {
             }
 
         case ADD_BOOK:
+            return {
+                ...state, 
+                books: [...state.books, action.payload]
+            }
         case EDIT_BOOK:
+            return{
+                ...state,
+                books: [...state.books.filter(book => book.id !== action.payload.id), action.payload]
+            }
+
         case DELETE_BOOK:
             return {
                 ...state, 
-                ...action.payload
+                books: [...state.books.filter(book => book.title !== action.payload.title)]
             }
 
         default:

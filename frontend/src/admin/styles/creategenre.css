@@ -1,0 +1,50 @@
+.creategenre-form{
+
+}
+
+
+.creategenre-form > div{
+    margin-bottom: 10px;
+}
+
+.creategenre-form > div > label{
+    display: block;
+}
+
+.creategenre-form > div > input.early-input{
+    width: 100%;
+    padding: 8px;
+    border: 1px #ccc solid;
+    outline: none;
+    transition: border-color .3s ease-in-out;
+}
+
+.creategenre-form > div > input.early-input:focus-within{
+    border-color: var(--app-theme);
+}
+
+.creategenre-form > div > select{
+    width: 100%;
+    padding: 10px;
+    border: 1px #ccc solid;
+    outline: none;
+}
+
+.creategenre-form > div:last-child{
+    margin-top: 20px;
+}
+
+.creategenre-submit-btn{
+    padding: 12px;
+    width: 100%;
+    color: #fff;
+    background: var(--app-theme);
+    border: none !important;
+    transition: background .4s ease-in-out;
+    outline: none;
+}
+
+.creategenre-submit-btn:hover{
+    color: #fff;
+    background: rgb(29, 109, 201);
+}

@@ -24,11 +24,6 @@ class EventAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Author)
-class AuthorAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     pass

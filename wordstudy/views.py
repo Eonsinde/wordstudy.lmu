@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import permission_classes
 from rest_framework import permissions
 
+import json
 
 from wordstudy.serializers import *
 from wordstudy.permissions import *
@@ -21,12 +22,8 @@ from wordstudy.permissions import *
 # Create your views here.
 
 
-class AuthorViewSet(viewsets.ModelViewSet):
-    queryset = Author.objects.all()
-    serializer_class = AuthorSerializer
-
-
 class GenreViewSet(viewsets.ModelViewSet):
+    permission_classes = (MakeChangesOrCreate, )
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
 
@@ -35,22 +32,24 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    permission_classes = (MakeChangesOrCreateBook, )
+    permission_classes = (MakeChangesOrCreate, )
 
     def create(self, request, *args, **kwargs):
-        serializer = BookSerializer(data=request.data)
+        form_data = {
+            'title': request.data.get('title'),
+            'author': request.data.get('author'),
+            'file': request.data.get('file'),
+            'genre': request.data.get('genre') if (type(request.data.get('genre')) == dict) else json.loads(request.data.get('genre'))
+        }
 
-        if serializer.is_valid():
-            new_book = serializer.save()
+        serializer = BookSerializer(data=form_data)
 
-            return Response({
-                'book': BookSerializer(new_book).data,
-                'message': 's'  # s - for success
-            })
-        else:
-            return Response({
-                'message': 'f'  # s - for failure
-            })
+        serializer.is_valid(raise_exception=True)
+        new_book = serializer.save()
+
+        return Response({
+            'book': BookSerializer(new_book).data,
+        })
 
     def list(self, request, *args, **kwargs):
         if len(request.query_params) != 0:
@@ -62,10 +61,53 @@ class BookViewSet(viewsets.ModelViewSet):
         serializer = BookSerializer(queryset, many=True)
         return Response(serializer.data)
 
+    def update(self, request, *args, **kwargs):
+        form_data = {}
+
+        if request.data.get('title'):
+            form_data['title'] = request.data.get('title')
+        if request.data.get('author'):
+            form_data['author'] = request.data.get('author')
+        if request.data.get('file'):
+            form_data['file'] = request.data.get('file')
+        if request.data.get('genre'):
+            form_data['genre'] = request.data.get('genre') if (type(request.data.get('genre')) == dict) else json.loads(request.data.get('genre'))
+
+        serializer = BookSerializer(Book.objects.get(pk=kwargs['pk']), data=form_data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        updated_book = serializer.save()
+        data = BookSerializer(updated_book).data
+        return Response(data)
+
+    def destroy(self, request, *args, **kwargs):
+        pk = kwargs['pk']
+        try:
+            book = Book.objects.get(pk=pk)
+        except Book.DoesNotExist:
+            return Response({'failed to delete': f'book {pk}'})
+        book.delete()
+        return Response({'book': BookSerializer(book).data})
+
 
 class ExcosViewSet(viewsets.ModelViewSet):
+    permission_classes = (MakeChangesOrCreate, )
+
     queryset = Excos.objects.all()
     serializer_class = ExcosSerializer
+
+    # def create(self, request, *args, **kwargs):
+    #     print("received data:", request.data)
+    #     serializer = ExcosSerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     new_exco = serializer.save()
+    #     return Response({'Working': "Just testing"})
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    permission_classes = (MakeChangesOrCreate, )
+
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
 
 
 class ContactViewSet(viewsets.ModelViewSet):
@@ -139,8 +181,12 @@ def join(request):
             new_member.save()
             try:
                 send_mail(subject=f'Thank you for signing up with us {new_member.name}',
-                          message="Welcome to word study; we hope to trasnform and impart your life through God's word \nPlease try to be at our next meeting: \nTuesday Fellowship Meetings; in front of chapel; 6:10pm \nThursday Family Prayer; car park; 6:30pm \nSunday Bible Study; in front of chapel; 3pm",
-                          from_email='chaplaincy.wordstudy@lmu.edu.ng', recipient_list=[f'{new_member.email}'], fail_silently=False)
+                          message="Welcome to word study; we hope to trasnform and impart your life through God's word"
+                                  " \nPlease try to be at our next meeting: \nTuesday Fellowship Meetings; in front "
+                                  "of chapel; 6:10pm \nThursday Family Prayer; car park; 6:30pm \nSunday Bible Study;"
+                                  " in front of chapel; 3pm",
+                          from_email='chaplaincy.wordstudy@lmu.edu.ng', recipient_list=[f'{new_member.email}'],
+                          fail_silently=False)
             except smtplib.SMTPException:
                 print("Couldn't reach member")
             else:
@@ -159,7 +205,8 @@ def search(request):
     storer = Book.objects.filter(title__icontains=f'{book_title}')
     books = []
     for book in storer:
-        book_obj = {'id': f'{book.pk}', "title": f'{book.title}', 'genre': f'{book.genre}', 'author': f'{book.author}', 'file_url': f'{book.file.url}'}
+        book_obj = {'id': f'{book.pk}', "title": f'{book.title}', 'genre': f'{book.genre}', 'author': f'{book.author}',
+                    'file_url': f'{book.file.url}'}
         books.append(book_obj)
     return JsonResponse(books, safe=False)
 
@@ -167,14 +214,17 @@ def search(request):
 def prayerbox(request):
     if request.method == 'POST':
         try:
-            new_prayer_req_instance = PrayerBox(name=request.POST['person_name'], prayer_point=request.POST['prayer_request'])
+            new_prayer_req_instance = PrayerBox(name=request.POST['person_name'],
+                                                prayer_point=request.POST['prayer_request'])
         except BaseException:
             return JsonResponse({'response': 'failure'})
         else:
             new_prayer_req_instance.save()
             send_mail(subject='Prayer box used',
-                          message=f"{new_prayer_req_instance.name} dropped a prayer request in the prayer box; \nPrayer Request:\n{new_prayer_req_instance.prayer_point}",
-                          from_email='chaplaincy.wordstudy@lmu.edu.ng', recipient_list=['chaplaincy.wordstudy@lmu.edu.ng'], fail_silently=False)
+                              message=f"{new_prayer_req_instance.name} dropped a prayer request in the prayer box; \nPrayer"
+                              f" Request:\n{new_prayer_req_instance.prayer_point}",
+                              from_email='chaplaincy.wordstudy@lmu.edu.ng',
+                              recipient_list=['chaplaincy.wordstudy@lmu.edu.ng'], fail_silently=False)
             return JsonResponse({'response': 'success'})
     else:
         return redirect('contact')

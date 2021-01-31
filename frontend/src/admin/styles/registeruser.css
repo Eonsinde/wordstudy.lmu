@@ -1,0 +1,47 @@
+.registeruser-form > div{
+    margin-bottom: 10px;
+}
+
+.registeruser-form > div > label{
+    display: block;
+}
+
+.registeruser-form > div > div > input.early-input{
+    width: 100%;
+    padding: 8px;
+    border: 1px #ccc solid;
+    outline: none;
+    transition: border-color .3s ease-in-out;
+}
+
+.registeruser-form > div > div > input.early-input:focus-within{
+    border-color: var(--app-theme);
+}
+
+.registeruser-form > div > select{
+    width: 100%;
+    padding: 10px;
+    border: 1px #ccc solid;
+    outline: none;
+}
+
+.registeruser-form > div:last-child{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.registeruser-submit-btn{
+    padding: 12px;
+    width: 30%;
+    margin: auto;
+    color: #fff;
+    background: var(--app-theme);
+    border: none !important;
+    transition: background .4s ease-in-out;
+    outline: none;
+}
+
+.registeruser-submit-btn:hover{
+    color: #fff;
+    background: rgb(29, 109, 201);
+}

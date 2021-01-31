@@ -6,6 +6,7 @@ import message from './message';
 import book from './book';
 import category from './category';
 import exco from './exco';
+import event from './event';
 
 
 
@@ -15,7 +16,8 @@ let rootReducer = combineReducers({
     message,
     book,
     category,
-    exco
+    exco,
+    event
 });
 
 export default rootReducer;

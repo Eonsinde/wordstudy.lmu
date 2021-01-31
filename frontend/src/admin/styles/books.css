@@ -1,0 +1,62 @@
+.manage-books{
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.manage-grid{
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.my-admin-card{
+    font-size: 1rem;
+    position: relative;
+    background: #fff;
+    padding: 30px 10px;
+}
+
+.my-admin-card-overlay{
+    /* position: absolute; */
+    left: 0;
+    right: 0;
+    width: initial;
+    text-align: center;   
+}
+
+.my-admin-card-overlay > button{
+    border: 1px #fff solid;
+    border-radius: none;
+    /* background: #fff; */
+    color: #fff;
+    background: var(--app-theme);
+    padding: .5rem 1rem;
+    transition: background .2s ease-in-out;
+    outline: none;
+}
+
+.my-admin-card-overlay > button:hover{
+    /* background: rgb(70, 70, 70);  */
+    background: #197db8;
+}
+
+.my-admin-card-body.card-body{
+    z-index: 3;
+    background: #fff;
+}
+
+
+@media screen and (max-width: 1200px){
+    .manage-books{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+  
+@media screen and (max-width: 575px){
+    .manage-books{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

@@ -38,6 +38,7 @@ export const login = ({username, password}) => dispatch => {
         password
     });
 
+
     // headers
     const config = {
         headers: {
@@ -71,9 +72,6 @@ export const register = (data) => (dispatch) => {
         }
     };
 
-    let { interests } = data; // destructing
-    let formatted_interests = interests.map(interest => interest.key);
-
     const registerFormData = new FormData();
     
     registerFormData.append('username', data.username);
@@ -89,10 +87,6 @@ export const register = (data) => (dispatch) => {
     registerFormData.append('profile', JSON.stringify({
         image: '', 
         phone_no: data.phone_no,
-        city: data.city,
-        state: data.state,
-        address: data.address,
-        interests: [...formatted_interests]
     }));
 
     axios.post('/accounts/auth/register', registerFormData, config)

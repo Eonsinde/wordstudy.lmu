@@ -10,20 +10,30 @@ import PrivateRoute from './routes/PrivateRoute';
 
 
 /* from layouts */
+import Alert from './layout/Alert';
+
 import Home from './layout/Home';
 import Library from './layout/Library';
 import Contact from './forms/Contact';
 import Register from './forms/Register';
 
 /* from the admin */
-import Login from './admin/Login';
-import Dashboard from './admin/Dashboard';
+import Login from './admin/layout/Login';
+import Dashboard from './admin/layout/Dashboard';
+import ManageBook from './admin/ManageBooks';
+import ManageGenre from './admin/ManageGenre';
+import ManageExcos from './admin/ManageExcos';
+import ManageEvent from './admin/ManageEvent';
+
+
+import Preloader from './content/Preloader';
 
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
+        <Alert />
         <Switch>
             <RouteControl exact path='/' navFixedBg={false} component={Home} />
             <RouteControl path='/library' navFixedBg={true} component={Library} />
@@ -31,12 +41,14 @@ function App() {
             <RouteControl path='/register' navFixedBg={true} component={Register} />
             
             {/* for the admin site */}
-            <Route path='/management'  component={Login} />
-            <PrivateRoute path='/dashboard' isAuthenticated={true} component={Dashboard} />
-            
-            {/* <Route path="/contact" component={Contact} />
+            <Route path='/admin-login' component={Login} />
+            <PrivateRoute path='/admin-dashboard' component={Dashboard} />
+            <PrivateRoute path='/manage-books' component={ManageBook} />
+            <PrivateRoute path='/manage-genres' component={ManageGenre} />
+            <PrivateRoute path='/manage-excos' component={ManageExcos} />
+            <PrivateRoute path='/manage-events' component={ManageEvent} />
 
-            <Route component={PageNotFound} /> */}
+            {/* <Route component={PageNotFound} />  */}
         </Switch>
     </Router>
     </Provider>

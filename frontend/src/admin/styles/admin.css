@@ -66,13 +66,17 @@
 }
 
 .rounded-circle {
-    border-radius: 50%!important;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50% !important;
 }
   
 /* FOR THE MAIN STYLES OF THE ADMIN SITE */
 .admin-wrapper {
     margin: 0;
-    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    /* font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
     /* line-height: 1.5; */
     color: #858796;
     text-align: left;
@@ -174,11 +178,24 @@
     font-family: 'Font Awesome 5 Free';
     margin-right: .1rem;
 }
+
+@media screen and (max-width: 1200px){
+    .admin-aside-header-text > h2{
+        font-size: 2em;
+        top: -2px;
+    }
+}
   
 @media screen and (max-width: 768px){
     .admin-aside .sub-div{
         display: block;
     }
+
+    .admin-aside-header-text > h2{
+        font-size: 2em;
+        top: -2px;
+    }
+
 }
 
 .admin-body{
@@ -360,6 +377,10 @@
     color: var(--dark);
 }
 
+.admain-footer{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 
 @media screen and (max-width: 1200px) {
     .admin-aside{
@@ -378,7 +399,7 @@
 
 @media screen and (max-width: 768px){
     .admin-aside{
-        z-index: 3000;
+        z-index: 1000;
         /* display: none; */
         transform: translateX(-100%);
         opacity: .5;

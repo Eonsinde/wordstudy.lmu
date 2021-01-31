@@ -20,7 +20,7 @@ from . import settings
 
 urlpatterns = [
     path('api/', include('wordstudy.urls')),
-    path('manage_me/', admin.site.urls),
+    path('manage-me/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', include('wordstudy.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

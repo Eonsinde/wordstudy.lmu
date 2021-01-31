@@ -6,22 +6,24 @@ from django.utils import timezone
 
 
 class Excos(models.Model):
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='excos')
-    post = models.CharField(default='', max_length=5, blank=True)
+    post = models.CharField(default='', max_length=100, blank=True)
 
     def __str__(self):
         return f'{self.name}'
 
     class Meta:
         ordering = ['-pk']
+        verbose_name_plural = 'Excos'
 
 
 class Event(models.Model):
-    title = models.CharField(max_length=1000)
-    photo = models.ImageField(upload_to='events')
-    theme = models.CharField(max_length=1000)
-    date = models.DateField(auto_now=True)
+    title = models.CharField(max_length=200)
+    venue = models.CharField(default="in front of university chapel", max_length=300)
+    theme = models.CharField(max_length=500)
+    date = models.DateField(default=timezone.now)
+    time = models.TimeField(default=timezone.now)
 
     def __str__(self):
         return f'{self.title}'
@@ -43,7 +45,7 @@ class Member(models.Model):
     room_no = models.CharField(max_length=100, default='')
     email = models.EmailField()
     date_of_birth = models.DateField()
-    date_joined = models.DateField(default=timezone.now)
+    date_joined = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -56,25 +58,19 @@ class Genre(models.Model):
         return f'{self.name}'
 
 
-class Author(models.Model):
-    name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return f'{self.name}'
-
-
 class Book(models.Model):
     id = models.CharField(max_length=50, default=uuid.uuid4, primary_key=True)
     title = models.CharField(max_length=200)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.CharField(default='', max_length=300)
     file = models.FileField(upload_to='books', null=True, blank=True)
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.title}'
 
     class Meta:
-        ordering = ['id']
+        ordering = ['-date']
 
 
 class PrayerBox(models.Model):
