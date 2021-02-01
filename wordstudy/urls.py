@@ -3,7 +3,7 @@ from wordstudy import views
 from django.urls import path, include
 
 from rest_framework import routers
-
+from accounts.views import ProfileViewSet
 
 router = routers.DefaultRouter()
 
@@ -15,6 +15,7 @@ router.register(r'contact', views.ContactViewSet)
 router.register(r'members', views.MemberViewSet)
 router.register(r'prayer-request', views.PrayerBoxViewSet)
 
+router.register(r'profile', ProfileViewSet)
 
 urlpatterns = [
     # path('', views.index, name='home'),

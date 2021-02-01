@@ -18,7 +18,7 @@ export const deleteGenre = id => (dispatch, getState) => {
                 type: DELETE_GENRE,
                 catID: id
             })
-            dispatch(createMessage({deletedBook: `Deleted Category`}))
+            dispatch(createMessage({deletedBook: `Deleted Genre`}))
         })
         .catch(err => createMessage({failed: 'Delete Failed'}));
 }

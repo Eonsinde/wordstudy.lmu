@@ -42,11 +42,13 @@ const CreateBook = ({show, setShow, addBook}) => {
 
             addBook(book_data);
             
-            setTitle('');
-            setAuthor('');
-            setFile('');
-            setFileName('');
-            setGenre('');            
+            setTimeout(() => {
+                setTitle('');
+                setAuthor('');
+                setFile('');
+                setFileName('');
+                setGenre('');   
+            }, 2000);
         }
     }
 

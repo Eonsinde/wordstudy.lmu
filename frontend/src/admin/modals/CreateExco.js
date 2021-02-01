@@ -23,10 +23,13 @@ const CreateExco = ({show, setShow, addExco}) => {
         }else{
             const formData = {name, post, image, imageName};
             addExco(formData);
-            setName('');
-            setPost('');
-            setImage('');
-            setImageName('');
+
+            setTimeout(() => {
+                setName('');
+                setPost('');
+                setImage('');
+                setImageName('');
+            }, 2000);
         }
     }
 

@@ -3,6 +3,7 @@ from rest_framework import generics, viewsets
 from rest_framework import permissions
 from knox.auth import AuthToken
 from rest_framework.response import Response
+from accounts.permissions import *
 import json
 
 # Create your views here.
@@ -14,39 +15,34 @@ class UserAPI(generics.RetrieveAPIView):
 
     permission_classes = [
         permissions.IsAuthenticated,
-        # permissions.IsAdminUser
     ]
 
     def get_object(self):
         return self.request.user
 
 
-class ProfileAPI(generics.GenericAPIView):
-    """ to edit, update and deactivate profile or account """
+class GetUsersAPI(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticated, )
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
-    def retrieve(self, request, pk=None):  # to view a user's profile
-        user = User.objects.get(pk=pk)
-        return Response(UserSerializer(user).data)
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data)
+class ProfileViewSet(viewsets.ModelViewSet):
+    """ to edit, update and deactivate profile or account """
+    permission_classes = (MakeChangesOnUser, )
 
-    def update(self, request, pk=None):  # send auth token to update
-        user = User.objects.get(pk=pk)
-        if user.is_authenticated and (user == request.user):  # check to see if user id matches authenticated user id before deleting
-            return Response({'message': 'Qualified to update'})
-        return Response({'message': "Can't update someone else's profile"})
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
 
-    def destroy(self, request, pk=None):  # send auth token to delete
-        user = User.objects.get(pk=pk)
-        if user.is_authenticated and (user == request.user):  # check to see if user id matches authenticated user id before deleting
-            return Response({'message': 'Qualified to delete'})
-        return Response({'message': 'Can\'t delete someone else\'s  profile'})
+    def update(self, request, *args, **kwargs):  # send auth token to update
+        serializer = UserSerializer(request.user, data={}, partial=True)
+        serializer.is_valid(raise_exception=True)
+        return Response({'message': 'Qualified to update'})
+
+    def destroy(self, request, *args, **kwargs):
+        user = User.objects.get(pk=kwargs.get('pk'))
+        return Response({'message': 'Qualified to delete'})
 
 
 class RegisterAPI(generics.ListCreateAPIView):  # to create a user account

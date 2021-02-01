@@ -10,6 +10,8 @@ import RegisterUser from '../modals/RegisterUser';
 import CreateEvent from '../modals/CreateEvent';
 import CreateGenre from '../modals/CreateGenre';
 import CreateExco from '../modals/CreateExco';
+import ManageProfile from '../modals/ManageProfile';
+
 
 import '../styles/admin.css';
 
@@ -24,6 +26,7 @@ const AdMain = ({user, logout, comp: Component}) => {
     let [createEventShow, setCreateEventShow] = useState(false);
     let [createExcoShow, setCreateExcoShow] = useState(false);
     let [registerUserShow, setregisterUserShow] = useState(false);
+    let [manageProfileShow, setManageProfileShow] = useState(false);
     let [formDropShow, setFormDropShow] = useState(false); // for the search form
 
     const handleLogout = () => {
@@ -51,6 +54,7 @@ const AdMain = ({user, logout, comp: Component}) => {
             <CreateEvent show={createEventShow} setShow={setCreateEventShow} />
             <CreateExco show={createExcoShow} setShow={setCreateExcoShow} />
             <RegisterUser show={registerUserShow} setShow={setregisterUserShow} />
+            <ManageProfile show={manageProfileShow} setShow={setManageProfileShow} />
 
             <aside className={`admin-aside ${asideShow ? 'show' : ''}`}>
                 <Link to="#" className="navbar-brand"><img src={wsf_logo} alt="avatar" /></Link>
@@ -144,11 +148,11 @@ const AdMain = ({user, logout, comp: Component}) => {
                             </Link>
 
                             <div className={`dropdown-menu  ${ dropShow ? `show` : `` } dropdown-menu-right shadow animated--grow-in`}>
-                                <Link to='#' className="dropdown-item">
+                                <Link to='/admin-profile' className="dropdown-item">
                                     <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </Link>
-                                <Link to="#" className="dropdown-item">
+                                <Link to='#' onClick={() => setManageProfileShow(true)} className="dropdown-item">
                                     <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </Link>

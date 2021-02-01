@@ -30,12 +30,14 @@ const CreateEvent = ({show, setShow, addEvent}) => {
             }
 
             addEvent(eventData);
-    
-            setTitle('');
-            setDate('');
-            setVenue('');
-            setTime('');
-            setTheme('');
+            
+            setTimeout(() => {
+                setTitle('');
+                setDate('');
+                setVenue('');
+                setTime('');
+                setTheme('');
+            }, 2000);
         }
     }
 

@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name', 'profile']
+        fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name', 'is_superuser', 'profile']
         extra_kwargs = {'id': {'read_only': True}, 'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -37,6 +37,7 @@ class UserSerializer(serializers.ModelSerializer):
         password = validated_data.pop('password')
         # interests_data = profile_data.pop('interests')
         user = User.objects.create_user(username, email, password, **validated_data)
+        user.is_staff = True
 
         # to create the user profile
         # image_id = profile_data.pop('image')

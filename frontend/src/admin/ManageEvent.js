@@ -24,7 +24,7 @@ const ManageEvent = ({events, getEvents, updateEvent, deleteEvent}) => {
     let [time, setTime] = useState('');
     
     useEffect(() => {
-        document.title = 'Word Study | Book Management';
+        document.title = 'Word Study | Event Management';
         getEvents();
         setIsLoading(false);
     }, []);

@@ -20,6 +20,7 @@ import Register from './forms/Register';
 /* from the admin */
 import Login from './admin/layout/Login';
 import Dashboard from './admin/layout/Dashboard';
+import Profile from './admin/layout/Profile';
 import ManageBook from './admin/ManageBooks';
 import ManageGenre from './admin/ManageGenre';
 import ManageExcos from './admin/ManageExcos';
@@ -43,6 +44,7 @@ function App() {
             {/* for the admin site */}
             <Route path='/admin-login' component={Login} />
             <PrivateRoute path='/admin-dashboard' component={Dashboard} />
+            <PrivateRoute path='/admin-profile' component={Profile} />
             <PrivateRoute path='/manage-books' component={ManageBook} />
             <PrivateRoute path='/manage-genres' component={ManageGenre} />
             <PrivateRoute path='/manage-excos' component={ManageExcos} />

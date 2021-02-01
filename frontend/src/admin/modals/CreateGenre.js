@@ -22,7 +22,9 @@ const CreateGenre = ({show, setShow, addGenre}) => {
             }
             addGenre(genreData);
 
-            setName('');
+            setTimeout(() => {
+                setName('');
+            }, 2000);
         }
     }
 

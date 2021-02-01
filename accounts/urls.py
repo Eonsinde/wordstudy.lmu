@@ -8,7 +8,7 @@ from accounts.views import *
 urlpatterns = [
     path('auth', include('knox.urls')),
     path('auth/user', UserAPI.as_view()),  # to retrieve a user detail for auth
-    path('auth/profile', ProfileAPI.as_view()),
+    # path('auth/profile', ProfileAPI.as_view()),
     path('auth/login', LoginAPI.as_view()),
     path('auth/register', RegisterAPI.as_view()),
     path('auth/logout', knox_views.LogoutView.as_view(), name='knox_logout'),

@@ -1,0 +1,27 @@
+.profile-preview-wrapper{
+    background: white;
+    margin: 100px 0 10px 0;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    /* border: 1px #ccc solid; */
+}
+
+.profile-img-warp{
+    /* height: 200px; */
+    text-align: center;
+    margin: auto;
+}
+
+.profile-img-warp > img{
+    height: 200px;
+    width: 200px;
+    margin: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 10px;
+    background: white;
+    margin-top: -80px;
+}
+
+.profile-warp.row{
+    padding: 20px 20px 20px 20px;
+}

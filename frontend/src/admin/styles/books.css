@@ -50,8 +50,18 @@
 
 
 @media screen and (max-width: 1200px){
+    .manage-grid{
+        gap: 7px;
+    }
     .manage-books{
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px){
+    .manage-grid{
+        gap: 10px;
+        grid-template-columns: repeat(1, 1fr);
     }
 }
   
