@@ -8,7 +8,7 @@ import {
     LOGOUT_FAIL,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    UPDATE_PROFILE
+    UPDATE_USER
 } from '../actions/types';
 
 
@@ -59,7 +59,7 @@ export default function auth(state=initialState, action){
                 isLoading: false
             }
 
-        case UPDATE_PROFILE:
+        case UPDATE_USER:
             return {
                 ...state
             }

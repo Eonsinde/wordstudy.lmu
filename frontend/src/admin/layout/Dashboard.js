@@ -1,9 +1,12 @@
 import {useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import '../styles/admin.css';
 
 
 function Dasboard() {
+    let user = useSelector(state => state.auth.user);
+
     useEffect(() => {
         document.title = 'Word Study | Dashboard';
     }, []);
@@ -70,14 +73,21 @@ function Dasboard() {
                         <small className='text-muted'>Manage All Excos</small>
                     </div>
                 </div>
-
-                <div className="admin-card shadow shadow-sm p-5">
-                    <Link to="/manage-admin-users"><i className="fas fa-user "></i></Link>
-                    <div className="admin-card-body">
-                        <h3>Admin</h3>
-                        <small className='text-muted'>Manage All Admin Users</small>
+                {
+                    user.is_superuser
+                    ?
+                    <div className="admin-card shadow shadow-sm p-5">
+                        <Link to="/manage-admin-users"><i className="fas fa-user "></i></Link>
+                        <div className="admin-card-body">
+                            <h3>Admin</h3>
+                            <small className='text-muted'>Manage All Admin Users</small>
+                        </div>
                     </div>
-                </div>
+                    :
+                    <>
+                    </>
+                }
+                
             </div>
         </>
     );

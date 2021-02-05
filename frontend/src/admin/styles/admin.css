@@ -56,6 +56,33 @@
         }
 }
 
+/* for the scroll bar */
+/* width */
+div.table-wrapper{
+    overflow-x: auto;
+}
+
+div.table-wrapper::-webkit-scrollbar {
+    height: 2px;
+    transition: .5s ease;
+}
+
+/* Track */
+div.table-wrapper::-webkit-scrollbar-track {
+    background: #3b3b3b; 
+}
+
+/* Handle */
+div.table-wrapper::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+div.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+
 .animated--grow-in, .sidebar .nav-item .collapse {
     -webkit-animation-name: growIn;
     animation-name: growIn;

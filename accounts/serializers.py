@@ -28,30 +28,41 @@ class UserSerializer(serializers.ModelSerializer):
         # print out the profile data
         print("In the serializer now \n Profile data:", profile_data, end='\n')
 
-        # print("Register form data:", validated_data['registerForm'], end='\n')
-        # print('Profile form data:', validated_data['profileForm'])
-        # print(json.dump())
-
         username = validated_data.pop('username')
         email = validated_data.pop('email')
         password = validated_data.pop('password')
-        # interests_data = profile_data.pop('interests')
         user = User.objects.create_user(username, email, password, **validated_data)
         user.is_staff = True
 
-        # to create the user profile
-        # image_id = profile_data.pop('image')
-        # print('Image ID:', image_id)
-        # req_img = UploadModel.objects.get(pk=image_id)
-        # print('Image Found', req_img)
         new_profile = Profile.objects.create(user=user, **profile_data)
-        # new_profile.image = req_img
-
-        # new_profile.interests.set(interests_data)
         new_profile.save()
 
         # to create the wish list for the user
         return user
+
+    def update(self, instance, validated_data):
+        print(validated_data)
+        if validated_data.get('username'):
+            instance.username = validated_data.get('username')
+        if validated_data.get('password'):
+            instance.set_password(validated_data.get('password'))
+        if validated_data.get('email'):
+            instance.email = validated_data.get('email')
+        if validated_data.get('first_name'):
+            instance.first_name = validated_data.get('first_name')
+        if validated_data.get('last_name'):
+            instance.last_name = validated_data.get('last_name')
+        if validated_data.get('profile', False) and validated_data.get('profile').get('image', False):
+            needed_profile = Profile.objects.get(user=instance)
+            needed_profile.image = validated_data.get('profile').get('image')
+            needed_profile.save()
+        if validated_data.get('profile', False) and validated_data.get('profile').get('phone_no', False):
+            needed_profile = Profile.objects.get(user=instance)
+            needed_profile.phone_no = validated_data.get('profile')['phone_no']
+            needed_profile.save()
+
+        instance.save()
+        return instance
 
 
 class LoginSerializer(serializers.Serializer):

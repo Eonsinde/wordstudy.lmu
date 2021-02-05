@@ -1,13 +1,14 @@
 import {useState} from 'react';
 import {connect} from 'react-redux';
-// import axios from 'axios';
 
+import {addUser} from '../../actions/user';
+ 
 import Swal from 'sweetalert2';
 import Modal from 'react-bootstrap/Modal';
 import '../styles/registeruser.css';
 
 
-const RegisterUser = ({show, setShow}) => {
+const RegisterUser = ({show, setShow, addUser}) => {
     let [username, setUsername] = useState('');
     let [email, setEmail] = useState('');
     let [firstName, setFirstName] = useState('');
@@ -31,10 +32,31 @@ const RegisterUser = ({show, setShow}) => {
                 title: 'Passwords don\'t match'
             })
         }else{
-            Toast.fire({
-                icon: 'success',
-                title: 'sending details'
-            })
+            let userFormData = new FormData();
+            
+            userFormData.append('username', username);
+            userFormData.append('email', email);
+            userFormData.append('first_name', firstName);
+            userFormData.append('last_name', lastName);
+            userFormData.append('password', password);
+            userFormData.append('actual-img', image, imageName);
+            userFormData.append('profile', JSON.stringify({
+                'image': 'null',
+                'phone_no': phone_no
+            }));
+
+            addUser(userFormData);
+
+            setTimeout(() => {
+                setUsername('');
+                setEmail('');
+                setFirstName('');
+                setLastName('');
+                setPassword('');
+                setImage('');
+                setImageName('');
+                setPhoneNo('');
+            }, 2000);
         }
     }
 
@@ -123,4 +145,4 @@ const Toast = Swal.mixin({
 });
 
  
-export default connect(null)(RegisterUser);
+export default connect(null, {addUser})(RegisterUser);

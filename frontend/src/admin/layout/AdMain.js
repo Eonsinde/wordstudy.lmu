@@ -67,28 +67,33 @@ const AdMain = ({user, logout, comp: Component}) => {
                 <ul className='admin-aside-nav'>
                     <li className="nav-item">
                         <Link to='/admin-dashboard' className="nav-link">
-                        <i className="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></Link>
+                            <i className="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </Link>
                     </li>
                     <li className="nav-item">
                         <Link to='#' onClick={() => setCreateGenreShow(true)} className="nav-link">
-                        <i className="fas fa-fw fa-folder"></i>
-                        <span>Create Genre</span></Link>
+                            <i className="fas fa-fw fa-folder"></i>
+                            <span>Create Genre</span>
+                        </Link>
                     </li>
                     <li className="nav-item">
                         <Link to='#' onClick={() => setCreateBookShow(true)} className="nav-link">
-                        <i className="fas fa-fw fa-book"></i>
-                        <span>Create Book</span></Link>
+                            <i className="fas fa-fw fa-book"></i>
+                            <span>Create Book</span>
+                        </Link>
                     </li>
                     <li className="nav-item">
                         <Link to='#' onClick={() => setCreateEventShow(true)} className="nav-link">
-                        <i className="fas fa-fw fa-globe"></i>
-                        <span>Create Event</span></Link>
+                            <i className="fas fa-fw fa-globe"></i>
+                            <span>Create Event</span>
+                        </Link>
                     </li>
                     <li className="nav-item">
                         <Link to='#' onClick={() => setCreateExcoShow(true)} className="nav-link">
-                        <i className="fas fa-fw fa-briefcase"></i>
-                        <span>Create Exco</span></Link>
+                            <i className="fas fa-fw fa-briefcase"></i>
+                            <span>Create Exco</span>
+                        </Link>
                     </li>
                     <li className="nav-item active">
                         <Link to='#' onClick={() => setregisterUserShow(true)} className="nav-link">

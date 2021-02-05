@@ -51,4 +51,8 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'; // added
 
 
 // for accounts 
-export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const CREATE_USER = 'CREATE_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const USERS_LOADING = 'USERS_LOADING';
+export const USERS_LOADED = 'USERS_LOADED';

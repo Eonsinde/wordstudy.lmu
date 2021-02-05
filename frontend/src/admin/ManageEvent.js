@@ -125,7 +125,7 @@ const ManageEvent = ({events, getEvents, updateEvent, deleteEvent}) => {
                                 evt.theme 
                                 : 
                                 <OverlayTrigger
-                                    key={index}
+                                    key={index+1}
                                     placement={'bottom'}
                                     overlay={
                                         <Tooltip id={`tooltip-${'bottom'}`}>
@@ -143,7 +143,7 @@ const ManageEvent = ({events, getEvents, updateEvent, deleteEvent}) => {
                                 evt.venue 
                                 : 
                                 <OverlayTrigger
-                                    key={evt.id}
+                                    key={index+2}
                                     placement={'bottom'}
                                     overlay={
                                         <Tooltip id={`tooltip-${'bottom'}`}>

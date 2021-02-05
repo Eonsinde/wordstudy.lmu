@@ -4,7 +4,6 @@ import '../styles/profile.css';
 
 
 const Profile = ({user}) => {
-    console.log(user);
     return ( 
         <section className='profile-preview-wrapper text-uppercase'>
             <div className='profile-img-warp'>
@@ -29,7 +28,7 @@ const Profile = ({user}) => {
                 </div>
                 <div className='col-md-12 text-center'>
                     <label>Phone Number</label>
-                    <p className='text-dark'>{user.phone_no}</p>
+                    <p className='text-dark'>{user?.profile?.phone_no}</p>
                 </div>
                 <div className='col-md-12 text-center'>
                     <label>Super User</label>

@@ -25,9 +25,8 @@ import ManageBook from './admin/ManageBooks';
 import ManageGenre from './admin/ManageGenre';
 import ManageExcos from './admin/ManageExcos';
 import ManageEvent from './admin/ManageEvent';
-
-
-import Preloader from './content/Preloader';
+import ManageUsers from './admin/ManageUsers';
+import ManageMembers from './admin/ManageMembers';
 
 
 function App() {
@@ -49,6 +48,8 @@ function App() {
             <PrivateRoute path='/manage-genres' component={ManageGenre} />
             <PrivateRoute path='/manage-excos' component={ManageExcos} />
             <PrivateRoute path='/manage-events' component={ManageEvent} />
+            <PrivateRoute path='/manage-admin-users' component={ManageUsers} />
+            <PrivateRoute path='/manage-new-members' component={ManageMembers} />
 
             {/* <Route component={PageNotFound} />  */}
         </Switch>

@@ -11,7 +11,7 @@ import {
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
 } from './types';
 
 
@@ -57,6 +57,7 @@ export const login = ({username, password}) => dispatch => {
         .catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status));
             dispatch({type: LOGIN_FAIL});
+            dispatch(createMessage({loginFailed: 'Login Failed'}));
         })
 }
 

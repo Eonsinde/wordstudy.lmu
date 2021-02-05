@@ -34,6 +34,12 @@ class Alert extends react.Component {
                 })
             }
 
+            if (this.props.message.loginFailed){
+                ToastCenter.fire({
+                    icon: 'error',
+                    title: this.props.message.loginFailed
+                })
+            }
 
             if(this.props.message.failed){
                 Toast.fire({

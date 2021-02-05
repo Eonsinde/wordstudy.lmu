@@ -22,7 +22,7 @@ class UserAPI(generics.RetrieveAPIView):
 
 
 class GetUsersAPI(generics.ListAPIView):
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -35,14 +35,37 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
-    def update(self, request, *args, **kwargs):  # send auth token to update
-        serializer = UserSerializer(request.user, data={}, partial=True)
+    def partial_update(self, request, *args, **kwargs):
+        form_data = {}
+        if request.data.get('username'):
+            form_data['username'] = request.data.get('username')
+        if request.data.get('email'):
+                form_data['email'] = request.data.get('email')
+        if request.data.get('password'):
+            form_data['password'] = request.data.get('password')
+        if request.data.get('first_name'):
+            form_data['first_name'] = request.data.get('first_name')
+        if request.data.get('last_name'):
+            form_data['last_name'] = request.data.get('last_name')
+        if request.data.get('actual-img'):
+            form_data['profile'] = {
+                'image': request.data.get('actual-img')
+            }
+        if request.data.get('phone_no'):
+            form_data['profile'] = {
+                'phone_no': request.data.get('phone_no')
+            }
+
+        serializer = UserSerializer(User.objects.get(pk=kwargs.get('pk')), data=form_data, partial=True)
         serializer.is_valid(raise_exception=True)
-        return Response({'message': 'Qualified to update'})
+        serializer.save()
+        return Response(serializer.data)
 
     def destroy(self, request, *args, **kwargs):
         user = User.objects.get(pk=kwargs.get('pk'))
-        return Response({'message': 'Qualified to delete'})
+        print("User to delete", user)
+        user.delete()
+        return Response({'message': 'Deleted'})
 
 
 class RegisterAPI(generics.ListCreateAPIView):  # to create a user account
@@ -58,6 +81,7 @@ class RegisterAPI(generics.ListCreateAPIView):  # to create a user account
             'email': request.data.get('email'),
             'first_name': request.data.get('first_name'),
             'last_name': request.data.get('last_name'),
+            # i used a conditional statement just in case i was using postman
             'profile': request.data.get('profile') if type(request.data.get('profile')) == dict else json.loads(request.data.get('profile'))
         }
 
@@ -69,15 +93,7 @@ class RegisterAPI(generics.ListCreateAPIView):  # to create a user account
         serializer = UserSerializer(data=form_data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        user_token = AuthToken.objects.create(user)
-        token_config = {
-            'auth_token': user_token[1],
-            'expiry': user_token[0].expiry
-        }
-        return Response({
-            'user': UserSerializer(user, context=self.get_serializer_context()).data,
-            'token': token_config['auth_token']
-        })
+        return Response((UserSerializer(user, context=self.get_serializer_context()).data))
 
 
 class LoginAPI(generics.GenericAPIView):

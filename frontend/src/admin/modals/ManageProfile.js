@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import {connect} from 'react-redux';
-// import axios from 'axios';
+import {updateUser} from '../../actions/user';
 
 import Swal from 'sweetalert2';
 import Modal from 'react-bootstrap/Modal';
 import '../styles/registeruser.css';
 
 
-const RegisterUser = ({user, show, setShow}) => {
+const ManageProfile = ({user, show, setShow, updateUser}) => {
     let [username, setUsername] = useState('');
     let [email, setEmail] = useState('');
     let [firstName, setFirstName] = useState('');
@@ -20,10 +20,10 @@ const RegisterUser = ({user, show, setShow}) => {
 
 
     const handleSubmit = () => {
-        if (username === '' || email === '' || firstName === "" || lastName === '' || image === '' || phone_no === '' || password === '' || confPassword === ''){
+        if (username === '' && email === '' && firstName === "" && lastName === '' && image === '' && phone_no === '' && password === '' && confPassword === ''){
             Toast.fire({
                 icon: 'error',
-                title: 'Please fill in all fields'
+                title: 'Please fill in a field'
             })
         }else if(password !== confPassword){
             Toast.fire({
@@ -31,10 +31,35 @@ const RegisterUser = ({user, show, setShow}) => {
                 title: 'Passwords don\'t match'
             })
         }else{
-            Toast.fire({
-                icon: 'success',
-                title: 'sending details'
-            })
+            let formData = new FormData();
+
+            if (username)
+                formData.append('username', username);
+            if (email)
+                formData.append('email', email);
+            if (firstName)
+                formData.append('first_name', firstName);
+            if (lastName)
+                formData.append('last_name', lastName);
+            if (password)
+                formData.append('password', password);
+            if (imageName)
+                formData.append('actual-img', image, imageName);
+            if (phone_no)
+                formData.append('phone_no', phone_no);
+            
+            updateUser(user.id, formData);
+
+            setTimeout(() => {
+                setUsername('');
+                setEmail('');
+                setFirstName('');
+                setLastName('');
+                setPassword('');
+                setImage('');
+                setImageName('');
+                setPhoneNo('');
+            }, 2000);
         }
     }
 
@@ -128,4 +153,4 @@ const mapStateToProps = state => ({
 });
 
  
-export default connect(mapStateToProps)(RegisterUser);
+export default connect(mapStateToProps, {updateUser})(ManageProfile);
