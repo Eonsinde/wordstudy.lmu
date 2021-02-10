@@ -5,19 +5,19 @@ import Swal from 'sweetalert2';
 import Preloader from '../content/Preloader';
 
 
-const ManagePrayers = () => {
-    let [prayers, setPrayers] = useState([]);
+const ManangeContact = () => {
     let [isLoading, setIsLoading] = useState(true);
+    let [contacts, setContacts] = useState([]);
 
     useEffect(() => {
-        document.title = 'Word Study | Manage Prayers';
+        document.title = 'Word Study | Manage Contacts';
     }, []);
 
     useEffect(() => {
         const fetchMembers = async () => {
             try{
-                let results = await axios.get('/prayer-request');
-                setPrayers(results.data);
+                let results = await axios.get('/contact');
+                setContacts(results.data);
                 setIsLoading(false);
             }catch(err){
                 Toast.fire({
@@ -41,14 +41,14 @@ const ManagePrayers = () => {
         })
         .then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`/prayer-request/${id}`)
+                axios.delete(`/contact/${id}`)
                     .then(res => {
                         Toast.fire({
                             icon: 'success',
                             title: 'Successfully Removed'
                         })   
 
-                        setPrayers([...prayers.filter(prayer => prayer.id !== id)]);
+                        setContacts([...contacts.filter(contact => contact.id !== id)]);
                     })
                     .catch(e => 
                         Toast.fire({
@@ -66,27 +66,28 @@ const ManagePrayers = () => {
         outline: 'none'
     }
 
-
     return ( 
-        <section className='manage-books'>
+        <section className='manage-grid'>
             {
                 isLoading
                 ?
                 <Preloader />
                 :
-                prayers.map(prayer => 
-                    <div className='prayer-item bg-white p-3 text-center'>
+                contacts.map(contact => 
+                    <div className='contact-item bg-white p-4 text-center'>
                         <div className="d-flex justify-content-center align-items-center mb-3">
-                            <small>Prayer</small>
+                            <small>Contact</small>
                         </div>
                         <div className='text-center mb-3 text-dark'>
-                            <p className='m-0 mb-1'>{prayer.name}</p>
-                            <p className='m-0 mb-1'>{prayer.prayer_point}</p>
+                            <p className='m-0 mb-1'>{contact.name}</p>
+                            <p className='m-0 mb-1'>{contact.email}</p>
+                            <p className='m-0 mb-1'>{contact.message}</p>
                         </div>
-                        <button style={btnStyles} className='btn-danger' onClick={() => handleDelete(prayer.id)}><i className='fas mr-1 fa-trash-alt'></i> delete</button>
-                    </div>    
+                        <button style={btnStyles} className='btn-danger' onClick={() => handleDelete(contact.id)}><i className='fas mr-1 fa-trash-alt'></i> delete</button>
+                    </div>   
                 )
             }
+
         </section>
     );
 }
@@ -110,4 +111,4 @@ const Toast = Swal.mixin({
     }
 });
  
-export default ManagePrayers;
+export default ManangeContact;

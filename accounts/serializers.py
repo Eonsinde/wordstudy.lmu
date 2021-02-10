@@ -41,7 +41,6 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        print(validated_data)
         if validated_data.get('username'):
             instance.username = validated_data.get('username')
         if validated_data.get('password'):

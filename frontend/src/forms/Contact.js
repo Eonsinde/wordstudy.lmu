@@ -46,6 +46,13 @@ const Contact = () => {
                         icon: 'success',
                         title: `Message Sent, ${res.data.name}`
                     });
+
+                    setTimeout(() => {
+                        setName('');
+                        setEmail('');
+                        setSubject('');
+                        setMessage('');
+                    }, 2000);
                 })
                 .catch(() => 
                     Toast.fire({
@@ -74,6 +81,11 @@ const Contact = () => {
                         icon: 'success',
                         title: `Prayers Sent, ${res.data.name}`
                     });
+
+                    setTimeout(() => {
+                        setPrayerReq('');
+                        setPersonName('');
+                    }, 2000);
                 })
                 .catch(() => 
                     Toast.fire({

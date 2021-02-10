@@ -33,20 +33,27 @@ const ManageProfile = ({user, show, setShow, updateUser}) => {
         }else{
             let formData = new FormData();
 
-            if (username)
+            if (username){
                 formData.append('username', username);
-            if (email)
+            }
+            if (email){
                 formData.append('email', email);
-            if (firstName)
+            }
+            if (firstName){
                 formData.append('first_name', firstName);
-            if (lastName)
+            }
+            if (lastName){
                 formData.append('last_name', lastName);
-            if (password)
+            }
+            if (password){
                 formData.append('password', password);
-            if (imageName)
+            }
+            if (imageName){
                 formData.append('actual-img', image, imageName);
-            if (phone_no)
+            }
+            if (phone_no){
                 formData.append('phone_no', phone_no);
+            }
             
             updateUser(user.id, formData);
 
@@ -147,10 +154,8 @@ const Toast = Swal.mixin({
     }
 });
 
-
 const mapStateToProps = state => ({
     user: state.auth.user
 });
 
- 
 export default connect(mapStateToProps, {updateUser})(ManageProfile);

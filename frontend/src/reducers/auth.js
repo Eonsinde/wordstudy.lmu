@@ -8,7 +8,8 @@ import {
     LOGOUT_FAIL,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
-    UPDATE_USER
+    UPDATE_USER,
+    UPDATE_AUTH_USER
 } from '../actions/types';
 
 
@@ -27,7 +28,6 @@ export default function auth(state=initialState, action){
                 ...state,
                 isLoading: true
             }
-
         case USER_LOADED:
             return {
                 ...state,
@@ -35,7 +35,12 @@ export default function auth(state=initialState, action){
                 isAuthenticated: true,
                 user: action.payload
             };
-        
+        case UPDATE_AUTH_USER:
+            return {
+                ...state,
+                user: action.payload.id === state.user.id ? action.payload : state.user
+            };
+
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token);

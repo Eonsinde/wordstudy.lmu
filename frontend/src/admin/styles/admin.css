@@ -147,13 +147,13 @@ div.table-wrapper::-webkit-scrollbar-thumb:hover {
     font-size: 2.5em;
     color: rgba(255, 255, 255, 0.116);
     position: absolute;
-    top: -8px;
+    top: -11px;
     left: 0;
     right: 0;
 }
 
 .admin-aside-header-text > p{
-    font-size: 1em;
+    font-size: .9em;
     color: #ccc;
     margin: 0;
 }
@@ -209,8 +209,9 @@ div.table-wrapper::-webkit-scrollbar-thumb:hover {
 @media screen and (max-width: 1200px){
     .admin-aside-header-text > h2{
         font-size: 2em;
-        top: -2px;
+        top: -4px;
     }
+
 }
   
 @media screen and (max-width: 768px){
@@ -220,7 +221,7 @@ div.table-wrapper::-webkit-scrollbar-thumb:hover {
 
     .admin-aside-header-text > h2{
         font-size: 2em;
-        top: -2px;
+        top: -4px;
     }
 
 }

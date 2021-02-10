@@ -61,7 +61,7 @@ const AdMain = ({user, logout, comp: Component}) => {
                 <hr className="sidebar-divider my-0"></hr>
                 <div className='admin-aside-header-text'>
                     <h2>Word Study</h2>
-                    <p>Admin Portal</p>
+                    <p className='text-uppercase'>Admin Portal</p>
                 </div>
                 <hr className="sidebar-divider my-0"></hr>
                 <ul className='admin-aside-nav'>

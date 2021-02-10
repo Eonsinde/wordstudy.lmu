@@ -17,6 +17,8 @@ import Library from './layout/Library';
 import Contact from './forms/Contact';
 import Register from './forms/Register';
 
+import PageNotFound from './content/PageNotFound';
+
 /* from the admin */
 import Login from './admin/layout/Login';
 import Dashboard from './admin/layout/Dashboard';
@@ -27,6 +29,8 @@ import ManageExcos from './admin/ManageExcos';
 import ManageEvent from './admin/ManageEvent';
 import ManageUsers from './admin/ManageUsers';
 import ManageMembers from './admin/ManageMembers';
+import ManageContacts from './admin/ManageContact';
+import ManagePrayers from './admin/ManagePrayers';
 
 
 function App() {
@@ -50,8 +54,12 @@ function App() {
             <PrivateRoute path='/manage-events' component={ManageEvent} />
             <PrivateRoute path='/manage-admin-users' component={ManageUsers} />
             <PrivateRoute path='/manage-new-members' component={ManageMembers} />
+            <PrivateRoute path='/manage-contacts' component={ManageContacts} />
+            <PrivateRoute path='/manage-prayer-requests' component={ManagePrayers} />
 
             {/* <Route component={PageNotFound} />  */}
+            <RouteControl navFixedBg={true} component={PageNotFound} />
+
         </Switch>
     </Router>
     </Provider>

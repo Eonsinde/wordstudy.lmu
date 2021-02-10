@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_USER, DELETE_USER, UPDATE_USER, USERS_LOADED, USERS_LOADING } from './types';
+import { CREATE_USER, DELETE_USER, UPDATE_USER, USERS_LOADED, USERS_LOADING, UPDATE_AUTH_USER } from './types';
 import { createMessage } from './message';
 
 
@@ -36,11 +36,10 @@ export const updateUser = (id, newData) => (dispatch, getState) => {
         }
     };
 
-    dispatch(createMessage({updatedBook: `Update Successful`}));
     axios.patch(`/profile/${id}/`, newData, config)
         .then(res => {
-            console.log(res.data);
             dispatch({type: UPDATE_USER, payload: res.data})
+            dispatch({type: UPDATE_AUTH_USER, payload: res.data});
             dispatch(createMessage({updatedBook: `Updated ${res.data.username}`}));
         })
         .catch(err => createMessage({failed: "Failed to update"}));

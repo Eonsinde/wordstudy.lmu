@@ -45,6 +45,14 @@ const Register = () => {
                         icon: 'success',
                         title: `Registration successful`
                     });
+
+                    setTimeout(() => {
+                        setName('');
+                        setEmail('');
+                        setDepartment('');
+                        setRoomNo('');
+                        setDateOfBirth('');
+                    }, 2000);
                 })
                 .catch(() => 
                     Toast.fire({
@@ -82,8 +90,9 @@ const Register = () => {
                             <input type="text" value={department} onChange={e => setDepartment(e.target.value)} className="" />
                         </div>
                         <div className="form-group col-md-6">
-                            <label htmlFor="room-no">Room Number</label>
+                            <label htmlFor="room-no">Hall/Room Number</label>
                             <input type="text" value={roomNo} onChange={e => setRoomNo(e.target.value)} className="" />
+                            <small className='text-muted'>Format: Abraham Hall, F304</small>
                         </div>
                         <div className="form-group col-md-6">
                             <label htmlFor="date-of-birth">Date Of Birth</label>

@@ -43,7 +43,7 @@ function Dasboard() {
                 </div>
 
                 <div className="admin-card shadow shadow-sm p-5">
-                    <Link to="/manage-contact-records"><i className="fas fa-phone-alt"></i></Link>
+                    <Link to="/manage-contacts"><i className="fas fa-phone-alt"></i></Link>
                     <div className="admin-card-body">
                         <h3>Contact</h3>
                         <small className='text-muted'>Check Out Contact Records</small>

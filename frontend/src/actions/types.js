@@ -56,3 +56,4 @@ export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const USERS_LOADING = 'USERS_LOADING';
 export const USERS_LOADED = 'USERS_LOADED';
+export const UPDATE_AUTH_USER = 'UPDATE_AUTH_USER';

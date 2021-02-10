@@ -37,7 +37,8 @@ class Alert extends react.Component {
             if (this.props.message.loginFailed){
                 ToastCenter.fire({
                     icon: 'error',
-                    title: this.props.message.loginFailed
+                    title: this.props.message.loginFailed,
+                    text: 'Incorrect Credentials'
                 })
             }
 

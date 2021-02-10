@@ -55,7 +55,6 @@ const Preloader = ({size}) => {
     }   
 }    
 
-
 Preloader.propTypes = {
     size: PropTypes.string,
 }
